@@ -122,6 +122,7 @@
                     <connections>
                         <outlet property="backButton" destination="TX0-5X-iJf" id="3FF-h7-5od"/>
                         <outlet property="cityTextField" destination="cDG-Vw-SCN" id="uWe-Ne-9AL"/>
+                        <outlet property="getWeatherButton" destination="tiN-xJ-58j" id="oik-PX-xNS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yNZ-pt-0Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -141,6 +142,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UnX-lf-uwy">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" red="0.60876828429999996" green="0.1069962755" blue="0.12196885790000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="4yW-PF-TBJ">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
@@ -158,7 +164,7 @@
                                         </state>
                                         <connections>
                                             <action selector="switchCity:" destination="KlR-xe-lBC" eventType="touchUpInside" id="Vij-zj-wTh"/>
-                                            <segue destination="RY1-UR-E7Q" kind="show" id="u0V-o5-UY1"/>
+                                            <segue destination="RY1-UR-E7Q" kind="show" identifier="switchCity" id="u0V-o5-UY1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -224,6 +230,7 @@
                     <connections>
                         <outlet property="cityLabel" destination="lNl-Po-VdA" id="SM0-5p-e4k"/>
                         <outlet property="imageVIew" destination="8MV-yt-Qr9" id="KmO-qW-IsC"/>
+                        <outlet property="spinner" destination="UnX-lf-uwy" id="x2E-rd-bN2"/>
                         <outlet property="switchCityButton" destination="CsP-nA-JyH" id="P9N-n8-fvD"/>
                         <outlet property="tempLabel" destination="hmh-Uz-P0x" id="xIi-ew-hdz"/>
                     </connections>

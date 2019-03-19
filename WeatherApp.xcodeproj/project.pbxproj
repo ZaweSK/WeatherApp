@@ -18,6 +18,7 @@
 		D01407D0223FF2CA0074263D /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407CF223FF2CA0074263D /* WeatherViewController.swift */; };
 		D01407D22240D7FA0074263D /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D12240D7FA0074263D /* WeatherDataModel.swift */; };
 		D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D62240DF4C0074263D /* SwitchCityViewController.swift */; };
+		D01407D92240EA450074263D /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D82240EA450074263D /* DataFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		D01407CF223FF2CA0074263D /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
 		D01407D12240D7FA0074263D /* WeatherDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 		D01407D62240DF4C0074263D /* SwitchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCityViewController.swift; sourceTree = "<group>"; };
+		D01407D82240EA450074263D /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +125,7 @@
 				D01407D62240DF4C0074263D /* SwitchCityViewController.swift */,
 				D01407CB223F95250074263D /* TutorialViewController.swift */,
 				D01407C9223F84C40074263D /* TutorialPageViewController.swift */,
+				D01407D82240EA450074263D /* DataFetcher.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				D01407CA223F84C40074263D /* TutorialPageViewController.swift in Sources */,
 				D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */,
 				D01407CE223FCC0C0074263D /* CardView.swift in Sources */,
+				D01407D92240EA450074263D /* DataFetcher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

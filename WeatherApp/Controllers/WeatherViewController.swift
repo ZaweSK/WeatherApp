@@ -19,10 +19,10 @@ class WeatherViewController: UIViewController
     
     var locationManager = CLLocationManager()
     
-    let APP_ID = "ceb75d42efb0a329e2d5d1d6819032b1"
-    let URL = "http://api.openweathermap.org/data/2.5/weather"
     
     var weather = WeatherDataModel()
+    var dataFetcher = DataFetcher()
+    
     var UIElements = [UIView]()
     
     // MARK: - UIConfiguration methods
@@ -49,6 +49,7 @@ class WeatherViewController: UIViewController
             imageVIew.image = image
         }
         
+        spinner.stopAnimating()
         showElements()
     }
     
@@ -72,7 +73,8 @@ class WeatherViewController: UIViewController
     
     // MARK: - @IBOutlets & @IBActions
     
-
+    @IBOutlet var spinner: UIActivityIndicatorView!
+    
     @IBAction func switchCity(_ sender: UIButton) {
     }
     
@@ -89,24 +91,20 @@ class WeatherViewController: UIViewController
     
     // MARK: - Weather data fetching & Parsing
     
-    func getWeatherData(url: String, _ parameters : [String:String]) {
-        Alamofire.request(url, method: .get, parameters: parameters)
-            .responseJSON().done { response in
-                
-                let weatherJSON : JSON = JSON(response.json)
-                
-                self.updateWeatherData(with: weatherJSON)
-                
+    func getWeatherData(for locationMethod: LocationMethod) {
+        
+        spinner.startAnimating()
+        
+        dataFetcher.fetchData(for: locationMethod).done { json in
+            
+            self.updateWeatherData(with: json)
+            
             }.catch {error in
-                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
-                    self.showElements()
-                    
-                })
-                alertController.addAction(alertAction)
                 
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(alertAction)
                 self.present(alertController, animated: true, completion: nil)
-                    
         }
     }
     
@@ -121,30 +119,44 @@ class WeatherViewController: UIViewController
         }
     }
     
+    
+    // MARK: - NAvigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "switchCity" {
+            let switchCityVC = segue.destination as! SwitchCityViewController
+            switchCityVC.delegate = self
+            switchCityVC.dataFetcher = dataFetcher
+        }
+    }
 
 }
 
 
-// MARKL: - LocationManagerDelegate methods
+// MARK: - ChangeCity delegate methods
+
+extension WeatherViewController: ChangeCityDelegate {
+    func userEnteredNewCity(cityJson: JSON) {
+        updateWeatherData(with: cityJson)
+    }
+}
+
+// MARK: - LocationManagerDelegate methods
 
 extension WeatherViewController: CLLocationManagerDelegate
 {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = (locations.last)!
+        let currentLocation = (locations.last)!
         
-        if location.horizontalAccuracy > 0 {
+        if currentLocation.horizontalAccuracy > 0 {
             locationManager.stopUpdatingLocation()
-
-            let latitude = String(location.coordinate.latitude)
-            let longitude = String(location.coordinate.longitude)
             
-            let params: [String:String] = [
-                "lat" : latitude,
-                "lon" : longitude,
-                "appid" : APP_ID
-            ]
-            
-            getWeatherData(url: URL, params)
+            getWeatherData(for: .userLocation(currentLocation))
         }
     }
+}
+
+enum LocationMethod {
+    case userLocation(CLLocation)
+    case city(String)
 }
