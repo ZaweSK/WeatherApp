@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+//         UserDefaults.standard.set(false, forKey: "introductionComplete")
+        
+        let introductionComplete = UserDefaults.standard.bool(forKey: "introductionComplete")
+        
+        if introductionComplete {
+            
+            let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+            let initialVC = storyBoard.instantiateViewController(withIdentifier: "Weather")
+            
+            window?.rootViewController = initialVC
+        }
         
         
         // Override point for customization after application launch.
