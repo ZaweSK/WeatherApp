@@ -12,7 +12,10 @@ import Alamofire
 import PromiseKit
 import SwiftyJSON
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController
+{
+    
+    // MARK: - Stored Properities
     
     var locationManager = CLLocationManager()
     
@@ -20,8 +23,38 @@ class WeatherViewController: UIViewController {
     let URL = "http://api.openweathermap.org/data/2.5/weather"
     
     var weather = WeatherDataModel()
+    var UIElements = [UIView]()
     
-
+    // MARK: - UIConfiguration methods
+    
+    func hideElements(){
+        UIElements.forEach {
+            $0.alpha = 0
+        }
+    }
+    
+    func showElements(){
+        UIView.animate(withDuration: 1) {
+            self.UIElements.forEach {
+                $0.alpha = 1
+            }
+        }
+    }
+    
+    func updateUIWithWeatherData(){
+        tempLabel.text = String(weather.temperature) + "℃"
+        cityLabel.text = weather.city
+        
+        if let image = UIImage(named: weather.weatherIconName) {
+            imageVIew.image = image
+        }
+        
+        showElements()
+    }
+    
+    
+    // MARK: - View Controller Life cycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,7 +63,7 @@ class WeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        UIElementsToHide = [switchCityButton, tempLabel, cityLabel, imageVIew]
+        UIElements = [switchCityButton, tempLabel, cityLabel, imageVIew]
         
     }
     
@@ -39,21 +72,8 @@ class WeatherViewController: UIViewController {
         hideElements()
     }
     
-    func hideElements(){
-        UIElementsToHide.forEach {
-            $0.alpha = 0
-        }
-    }
     
-    func showElements(){
-        UIView.animate(withDuration: 1) {
-            self.UIElementsToHide.forEach {
-                $0.alpha = 1
-            }
-        }
-    }
-    
-    var UIElementsToHide = [UIView]()
+    // MARK: - @IBOutlets & @IBActions
     
 
     @IBAction func switchCity(_ sender: UIButton) {
@@ -69,6 +89,8 @@ class WeatherViewController: UIViewController {
     @IBOutlet var imageVIew: UIImageView!
 
     
+    
+    // MARK: - Weather data fetching & Parsing
     
     func getWeatherData(url: String, _ parameters : [String:String]) {
         Alamofire.request(url, method: .get, parameters: parameters)
@@ -97,11 +119,16 @@ class WeatherViewController: UIViewController {
             weather.temperature = Int(temp - 273)
             weather.city = json["name"].stringValue
             weather.condition = json["weather"][0]["id"].intValue
+            
+            updateUIWithWeatherData()
         }
     }
+    
 
 }
 
+
+// MARKL: - LocationManagerDelegate methods
 
 extension WeatherViewController: CLLocationManagerDelegate
 {
@@ -123,5 +150,4 @@ extension WeatherViewController: CLLocationManagerDelegate
             getWeatherData(url: URL, params)
         }
     }
-    
 }

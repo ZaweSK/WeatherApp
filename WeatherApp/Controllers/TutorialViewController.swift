@@ -12,15 +12,13 @@ import CoreLocation
 class TutorialViewController: UIViewController,TutorialPageViewControllerDelegate, CLLocationManagerDelegate
 {
     
-    @IBOutlet var pageControlVerticalSpacing: NSLayoutConstraint!
+    // MARK: - VC's life cyclce methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         pageControl.currentPageIndicatorTintColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
     }
-    
-    
     
     override func viewWillAppear(_ animated: Bool) {
         containerView.alpha = 0
@@ -37,6 +35,9 @@ class TutorialViewController: UIViewController,TutorialPageViewControllerDelegat
         }
     }
     
+    
+    // MARK: - UI configuration methods
+    
     func animateDissapearance(_ completion: @escaping (()->())){
         UIView.animate(withDuration: 1, animations: {
             self.containerView.alpha = 0
@@ -48,9 +49,14 @@ class TutorialViewController: UIViewController,TutorialPageViewControllerDelegat
         }
     }
     
+    // MARK : - @IBOutlets & @IBActions
+    
     @IBOutlet var containerView: UIView!
     
     @IBOutlet var pageControl: UIPageControl!
+    
+    
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tutorialPageViewController = segue.destination as? TutorialPageViewController {
@@ -72,8 +78,6 @@ class TutorialViewController: UIViewController,TutorialPageViewControllerDelegat
             
             UserDefaults.standard.set(true, forKey: "introductionComplete")
             
-            print( NSSearchPathForDirectoriesInDomains(.libraryDirectory, .userDomainMask, true) as [AnyObject])
-            
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.animateDissapearance() {
                     self.performSegue(withIdentifier: "goToWeather", sender: self)
@@ -81,8 +85,6 @@ class TutorialViewController: UIViewController,TutorialPageViewControllerDelegat
             }
         }
     }
-    
-
 }
 
 extension UIPageControl{
