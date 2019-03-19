@@ -8,8 +8,8 @@
 
 import UIKit
 
-class TutorialPageViewController: UIPageViewController {
-    
+class TutorialPageViewController: UIPageViewController
+{    
     weak var tutorialDelegate: TutorialPageViewControllerDelegate?
     
     enum Page: String, CaseIterable{
@@ -18,6 +18,8 @@ class TutorialPageViewController: UIPageViewController {
         case island3
     }
 
+    // MARK: - VC's life cycle methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +37,8 @@ class TutorialPageViewController: UIPageViewController {
         
         tutorialDelegate?.tutorialPageViewController(tutorialPageViewController: self, didUpdatePageCount: orderedViewControllers.count)
     }
+    
+    // MARK: - Content for PageViewController
     
     lazy var orderedViewControllers: [UIViewController] = {
         var viewControllers = [UIViewController]()
@@ -98,6 +102,7 @@ extension TutorialPageViewController: UIPageViewControllerDelegate {
 
 
 
+// MARK: - Protocols
 
 protocol TutorialPageViewControllerDelegate: class {
     

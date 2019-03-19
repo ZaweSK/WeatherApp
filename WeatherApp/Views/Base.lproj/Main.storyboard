@@ -57,6 +57,82 @@
             </objects>
             <point key="canvasLocation" x="53.600000000000001" y="26.53673163418291"/>
         </scene>
+        <!--Switch City View Controller-->
+        <scene sceneID="wP3-ku-ACa">
+            <objects>
+                <viewController id="RY1-UR-E7Q" customClass="SwitchCityViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ubP-DT-DbE">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7H-1d-sds">
+                                <rect key="frame" x="0.0" y="20" width="375" height="333.5"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter City Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-Vw-SCN">
+                                        <rect key="frame" x="75" y="152" width="225" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiN-xJ-58j">
+                                        <rect key="frame" x="99" y="203" width="177" height="42"/>
+                                        <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="30"/>
+                                        <state key="normal" title="Get Weather">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="getWeather:" destination="RY1-UR-E7Q" eventType="touchUpInside" id="unq-q4-ApX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX0-5X-iJf">
+                                        <rect key="frame" x="10" y="10" width="56.5" height="50"/>
+                                        <state key="normal" title="Button" image="backArrow"/>
+                                        <connections>
+                                            <action selector="goBack:" destination="RY1-UR-E7Q" eventType="touchUpInside" id="nWd-zj-Bmd"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="tiN-xJ-58j" firstAttribute="centerX" secondItem="x7H-1d-sds" secondAttribute="centerX" id="DqO-uA-Zcw"/>
+                                    <constraint firstItem="TX0-5X-iJf" firstAttribute="width" secondItem="x7H-1d-sds" secondAttribute="width" multiplier="0.15" id="EIC-Ll-YgT"/>
+                                    <constraint firstItem="cDG-Vw-SCN" firstAttribute="centerY" secondItem="x7H-1d-sds" secondAttribute="centerY" id="MhU-a2-hTM"/>
+                                    <constraint firstItem="cDG-Vw-SCN" firstAttribute="width" secondItem="x7H-1d-sds" secondAttribute="width" multiplier="0.6" id="Sld-cG-5sU"/>
+                                    <constraint firstItem="TX0-5X-iJf" firstAttribute="top" secondItem="x7H-1d-sds" secondAttribute="top" constant="10" id="VZk-C5-p4y"/>
+                                    <constraint firstItem="TX0-5X-iJf" firstAttribute="leading" secondItem="x7H-1d-sds" secondAttribute="leading" constant="10" id="aB3-uG-we0"/>
+                                    <constraint firstItem="cDG-Vw-SCN" firstAttribute="centerX" secondItem="x7H-1d-sds" secondAttribute="centerX" id="mIl-EK-hno"/>
+                                    <constraint firstItem="TX0-5X-iJf" firstAttribute="height" secondItem="x7H-1d-sds" secondAttribute="height" multiplier="0.15" id="nCF-UB-vxm"/>
+                                    <constraint firstItem="tiN-xJ-58j" firstAttribute="top" secondItem="cDG-Vw-SCN" secondAttribute="bottom" constant="21" id="sCd-eC-anl"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.93725490196078431" blue="0.8666666666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="qvE-3W-Z5X" firstAttribute="trailing" secondItem="x7H-1d-sds" secondAttribute="trailing" id="EH5-hv-oqO"/>
+                            <constraint firstItem="x7H-1d-sds" firstAttribute="height" secondItem="ubP-DT-DbE" secondAttribute="height" multiplier="0.5" id="SB7-za-LEL"/>
+                            <constraint firstItem="x7H-1d-sds" firstAttribute="top" secondItem="qvE-3W-Z5X" secondAttribute="top" id="f5c-AD-TrZ"/>
+                            <constraint firstItem="x7H-1d-sds" firstAttribute="leading" secondItem="qvE-3W-Z5X" secondAttribute="leading" id="tuH-HV-t3h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qvE-3W-Z5X"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="eId-J5-6zi" appends="YES" id="MNK-s5-vih"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="backButton" destination="TX0-5X-iJf" id="3FF-h7-5od"/>
+                        <outlet property="cityTextField" destination="cDG-Vw-SCN" id="uWe-Ne-9AL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yNZ-pt-0Pi" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="eId-J5-6zi">
+                    <connections>
+                        <action selector="backgroundTapped:" destination="RY1-UR-E7Q" id="VCq-CQ-UmZ"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="839" y="1430"/>
+        </scene>
         <!--Weather View Controller-->
         <scene sceneID="nZs-zb-Wmc">
             <objects>
@@ -82,6 +158,7 @@
                                         </state>
                                         <connections>
                                             <action selector="switchCity:" destination="KlR-xe-lBC" eventType="touchUpInside" id="Vij-zj-wTh"/>
+                                            <segue destination="RY1-UR-E7Q" kind="show" id="u0V-o5-UY1"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -291,6 +368,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="backArrow" width="122.06622314453125" height="122.06622314453125"/>
         <image name="backgroundImage" width="675" height="1200"/>
         <image name="imageView:8MV-yt-Qr9:image" width="128" height="128">
             <mutableData key="keyedArchiveRepresentation">

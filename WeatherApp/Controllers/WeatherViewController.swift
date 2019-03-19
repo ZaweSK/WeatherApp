@@ -56,6 +56,7 @@ class WeatherViewController: UIViewController
     // MARK: - View Controller Life cycle methods
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
 
         locationManager.delegate = self
@@ -65,10 +66,6 @@ class WeatherViewController: UIViewController
         
         UIElements = [switchCityButton, tempLabel, cityLabel, imageVIew]
         
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         hideElements()
     }
     
