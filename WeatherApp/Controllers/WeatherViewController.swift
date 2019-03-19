@@ -8,6 +8,9 @@
 
 import UIKit
 import CoreLocation
+import Alamofire
+import PromiseKit
+import SwiftyJSON
 
 class WeatherViewController: UIViewController {
     
@@ -15,6 +18,8 @@ class WeatherViewController: UIViewController {
     
     let APP_ID = "ceb75d42efb0a329e2d5d1d6819032b1"
     let URL = "http://api.openweathermap.org/data/2.5/weather"
+    
+    var weather = WeatherDataModel()
     
 
     override func viewDidLoad() {
@@ -25,16 +30,37 @@ class WeatherViewController: UIViewController {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
+        UIElementsToHide = [switchCityButton, tempLabel, cityLabel, imageVIew]
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
- 
+        hideElements()
     }
+    
+    func hideElements(){
+        UIElementsToHide.forEach {
+            $0.alpha = 0
+        }
+    }
+    
+    func showElements(){
+        UIView.animate(withDuration: 1) {
+            self.UIElementsToHide.forEach {
+                $0.alpha = 1
+            }
+        }
+    }
+    
+    var UIElementsToHide = [UIView]()
     
 
     @IBAction func switchCity(_ sender: UIButton) {
     }
+    
+    @IBOutlet var switchCityButton: UIButton!
+    
     
     @IBOutlet var tempLabel: UILabel!
     
@@ -45,7 +71,33 @@ class WeatherViewController: UIViewController {
     
     
     func getWeatherData(url: String, _ parameters : [String:String]) {
+        Alamofire.request(url, method: .get, parameters: parameters)
+            .responseJSON().done { response in
+                
+                let weatherJSON : JSON = JSON(response.json)
+                
+                self.updateWeatherData(with: weatherJSON)
+                
+            }.catch {error in
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: { _ in
+                    self.showElements()
+                    
+                })
+                alertController.addAction(alertAction)
+                
+                self.present(alertController, animated: true, completion: nil)
+                    
+        }
+    }
+    
+    func updateWeatherData(with json: JSON){
         
+        if let temp = json["main"]["temp"].double {
+            weather.temperature = Int(temp - 273)
+            weather.city = json["name"].stringValue
+            weather.condition = json["weather"][0]["id"].intValue
+        }
     }
 
 }

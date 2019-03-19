@@ -147,6 +147,7 @@
                     <connections>
                         <outlet property="cityLabel" destination="lNl-Po-VdA" id="SM0-5p-e4k"/>
                         <outlet property="imageVIew" destination="8MV-yt-Qr9" id="KmO-qW-IsC"/>
+                        <outlet property="switchCityButton" destination="CsP-nA-JyH" id="P9N-n8-fvD"/>
                         <outlet property="tempLabel" destination="hmh-Uz-P0x" id="xIi-ew-hdz"/>
                     </connections>
                 </viewController>
