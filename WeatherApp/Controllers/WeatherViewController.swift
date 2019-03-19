@@ -34,11 +34,12 @@ class WeatherViewController: UIViewController
     }
     
     func showElements(){
-        UIView.animate(withDuration: 1) {
+        
+        UIView.animate(withDuration: 1, delay: 0, options: .allowUserInteraction, animations: {
             self.UIElements.forEach {
                 $0.alpha = 1
             }
-        }
+        }, completion: nil)
     }
     
     func updateUIWithWeatherData(){

@@ -69,7 +69,7 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     func reactionToInvalidCity(with cityName: String){
         
         let options = [
-            "Really? \(cityName)...",
+            "Really? \(cityName) ? ",
             "We both know there is no such thing as \(cityName)",
             "Try again. There is no \(cityName)",
             "Never heard of \(cityName)",
