@@ -41,7 +41,7 @@
                             <constraint firstItem="arz-bV-MNZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Dt-Og-VTN"/>
                             <constraint firstItem="5T2-1r-tih" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="AQg-dq-bYv"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="5T2-1r-tih" secondAttribute="trailing" constant="16" id="NOB-cp-u27"/>
-                            <constraint firstItem="arz-bV-MNZ" firstAttribute="top" secondItem="5T2-1r-tih" secondAttribute="bottom" constant="10" id="iMQ-Yt-f4v"/>
+                            <constraint firstItem="arz-bV-MNZ" firstAttribute="top" secondItem="5T2-1r-tih" secondAttribute="bottom" constant="10" id="O6S-XB-K1s"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5T2-1r-tih" secondAttribute="bottom" constant="50" id="sJV-ep-Yn0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,7 +49,6 @@
                     <connections>
                         <outlet property="containerView" destination="5T2-1r-tih" id="xgS-qw-ZQR"/>
                         <outlet property="pageControl" destination="arz-bV-MNZ" id="aNJ-50-6hR"/>
-                        <outlet property="pageControlVerticalSpacing" destination="iMQ-Yt-f4v" id="cSM-Vd-5XT"/>
                         <segue destination="KlR-xe-lBC" kind="show" identifier="goToWeather" id="FIx-vL-pFP"/>
                     </connections>
                 </viewController>

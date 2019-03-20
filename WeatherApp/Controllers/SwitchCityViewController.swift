@@ -48,12 +48,21 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     @IBOutlet var getWeatherButton: UIButton!
     
     @IBAction func getWeather(_ sender: UIButton) {
+        
+        
+        
         let cityName = cityTextField.text!
 
+        
+        
         guard cityName.count > 0 else {
             shakeTextField()
             return
         }
+        
+        photoFromGoogle(for: cityName )
+        
+        
 
         dataFetcher.fetchData(for: .city(cityName)).done { json in
             
@@ -61,7 +70,7 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
             self.dismiss(animated: true, completion: nil)
             
             }.catch { error in
-                
+                print(error)
                 self.reactionToInvalidCity(with: cityName)
         }
     }
@@ -146,4 +155,53 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         cityTextField.endEditing(true)
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func photoFromGoogle(for city: String){
+        
+        
+
+//        https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=London&key=AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14
+      
+
+    }
+    
+    
 }

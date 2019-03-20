@@ -60,6 +60,9 @@ class WeatherViewController: UIViewController
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.weatherViewController = self
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -93,6 +96,7 @@ class WeatherViewController: UIViewController
     // MARK: - Weather data fetching & Parsing
     
     func getWeatherData(for locationMethod: LocationMethod) {
+        print("getting data")
         
         spinner.startAnimating()
         
