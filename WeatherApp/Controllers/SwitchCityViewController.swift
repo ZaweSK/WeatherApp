@@ -12,8 +12,7 @@ import SwiftyJSON
 import PromiseKit
 
 protocol ChangeCityDelegate{
-    func userEnteredNewCity(cityJson: JSON)
-    func updatePhotoReference(reference: String)
+    func userEnteredNewCity(weatherForCityJson: JSON)
 }
 
 class SwitchCityViewController: UIViewController, UITextFieldDelegate
@@ -51,23 +50,17 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     
     @IBAction func getWeather(_ sender: UIButton) {
         
-        
-        
         let cityName = cityTextField.text!
-
-        
         
         guard cityName.count > 0 else {
             shakeTextField()
             return
         }
         
-        
         dataFetcher.fetchWeatherData(for: .city(cityName)).done { json in
-        
-            self.photoFromGoogle(for: cityName )
             
-            self.delegate?.userEnteredNewCity(cityJson: json)
+            self.delegate?.userEnteredNewCity(weatherForCityJson: json)
+            
             self.dismiss(animated: true, completion: nil)
             
             }.catch { error in
@@ -156,62 +149,5 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
         cityTextField.endEditing(true)
     }
-    
-
-    
-    
-    func photoFromGoogle(for city: String){
-        
-        
-        firstly {
-            
-            self.dataFetcher!.fetchPlaceId(for: city)
-            
-            }.then { json -> Promise<JSON> in
-                
-                let placeId = json["candidates"][0]["place_id"].stringValue
-                
-                print(placeId)
-                
-                return self.dataFetcher.fetchPlaceDetails(for: placeId)
-                
-            }.done { json in
-                
-              let photoReference = json["result"]["photos"][0]["photo_reference"].stringValue
-                
-              self.delegate?.updatePhotoReference(reference: photoReference)
-                
-            }.catch {error in
-                
-                print(error)
-                
-        }
-        
-
-//       let urlString = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-//
-//        let params = [
-//            "inputtype" : "textquery",
-//            "input" : city,
-//            "key" : "AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14"
-//        ]
-//
-//        Alamofire.request(urlString, method: .get, parameters: params).responseJSON(){ response in
-//
-//            print(response.request )
-//            switch response.result{
-//
-//
-//            case .success(let value):
-//                print(value)
-//            case .failure(let error):
-//                print(error)
-//            }
-//
-//        }
-      
-
-    }
-    
     
 }

@@ -20,8 +20,6 @@ enum GoogleWebServiceError:Error{
     case wrongURL
 }
 
-
-
 enum GoogleWebService: String {
     case placeSearch = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
     case placeDetails = "https://maps.googleapis.com/maps/api/place/details/json?"
@@ -34,7 +32,7 @@ class DataFetcher {
     let openWeatherMap_APP_ID = "ceb75d42efb0a329e2d5d1d6819032b1"
     let openWeatherMapURL = "http://api.openweathermap.org/data/2.5/weather"
     let googleWebService_APP_ID = "AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14"
-   
+    
     
     private func getOpenWeatherMapParams(for method: LocationMethod) -> [String:String]{
         
@@ -66,50 +64,50 @@ class DataFetcher {
     
     
     
-//    private func getGoogleWebServiceURL(for webService: GoogleWebService, city: String?  = nil)->URL?{
-//
-//        switch webService {
-//
-//        case .placeDetails:
-//
-//            break
-//
-//
-//        case .placePhotos: break
-//
-//        case .placeSearch:
-//
-//            guard let cityName = city else { return nil}
-//
-//            let params = [
-//                "inputtype" : "textquery",
-//                "input" : cityName,
-//                "key" : googleWebService_APP_ID
-//            ]
-//
-//            let url = createURL(with: webService.rawValue, params)
-//
-//            return url
-//
-//        }
-//        return nil
-//    }
-//
+    //    private func getGoogleWebServiceURL(for webService: GoogleWebService, city: String?  = nil)->URL?{
+    //
+    //        switch webService {
+    //
+    //        case .placeDetails:
+    //
+    //            break
+    //
+    //
+    //        case .placePhotos: break
+    //
+    //        case .placeSearch:
+    //
+    //            guard let cityName = city else { return nil}
+    //
+    //            let params = [
+    //                "inputtype" : "textquery",
+    //                "input" : cityName,
+    //                "key" : googleWebService_APP_ID
+    //            ]
+    //
+    //            let url = createURL(with: webService.rawValue, params)
+    //
+    //            return url
+    //
+    //        }
+    //        return nil
+    //    }
+    //
     
     private func createURL(with urlString: String, _ params: [String:String])->URL{
-
+        
         var urlComponents = URLComponents(string: urlString)!
-
+        
         let queryItems = convertToQueryItems(dict: params)
-
+        
         urlComponents.queryItems = queryItems
-
+        
         return urlComponents.url!
     }
-
+    
     private func convertToQueryItems(dict: [String:String])->[URLQueryItem] {
         var queryItems = [URLQueryItem]()
-
+        
         for (key,value) in dict {
             let queryItem = URLQueryItem(name: key, value: value)
             queryItems.append(queryItem)
@@ -118,7 +116,7 @@ class DataFetcher {
     }
     
     func fetchWeatherData(for method: LocationMethod)-> Promise<JSON> {
-
+        
         return Promise { seal in
             
             let params = getOpenWeatherMapParams(for: method)
@@ -138,14 +136,11 @@ class DataFetcher {
     }
     
     
-//https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJdd4hrwug2EcRmSrV3Vo6llI&key=AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14
-
     
     func fetchPlacePhotos(for reference: String)->Promise<UIImage>{
         
-        
         return Promise { seal in
-
+            
             let params = [
                 "photoreference" : reference,
                 "maxheight" : "800",

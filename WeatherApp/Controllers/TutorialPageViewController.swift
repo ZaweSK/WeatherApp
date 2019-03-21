@@ -55,9 +55,6 @@ class TutorialPageViewController: UIPageViewController
 
 }
 
-
-
-
 // MARK: - PageViewController data source methods
 
 extension TutorialPageViewController: UIPageViewControllerDataSource {

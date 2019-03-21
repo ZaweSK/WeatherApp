@@ -70,40 +70,21 @@ class WeatherViewController: UIViewController
         locationManager.startUpdatingLocation()
         
         UIElements = [switchCityButton, tempLabel, cityLabel, imageVIew]
+        backgroundImageView.alpha = 0
         
         hideElements()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-//        backgroundImageView.alpha = 0
-    }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print(#function)
+    func showImage(){
         
-//        if let photo = weather.photoReference {
-//
-//            dataFetcher.fetchPlacePhotos(for: photo).done { image in
-//
-//                    self.backgroundImageView.image = image
-//
-//                }.catch { error in
-//
-//                    print(error)
-//            }
-//        }
-    }
+        UIApplication.shared.isNetworkActivityIndicatorVisible = false
     
-    func updateImage(with image: UIImage){
-        
-//        backgroundImageView.image = image
-//
-//        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
-//
-//            self.backgroundImageView.alpha = 1
-//
-//        }, completion: nil)
+        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+
+            self.backgroundImageView.alpha = 1
+
+        }, completion: nil)
         
     }
     
@@ -127,10 +108,9 @@ class WeatherViewController: UIViewController
     
     @IBOutlet var backgroundImageView: UIImageView!
     
-    // MARK: - Weather data fetching & Parsing
+    // MARK: - data fetching
     
     func getWeatherData(for locationMethod: LocationMethod) {
-        print("getting data")
         
         spinner.startAnimating()
         
@@ -147,12 +127,47 @@ class WeatherViewController: UIViewController
         }
     }
     
+    
+    func checkForPhotoReference(for city: String){
+        
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
+        firstly {
+            
+            dataFetcher.fetchPlaceId(for: city)
+            
+            }.then { json -> Promise<JSON> in
+                
+                let placeId = json["candidates"][0]["place_id"].stringValue
+                
+                return self.dataFetcher.fetchPlaceDetails(for: placeId)
+                
+            }.done { json in
+                
+                self.weather.photoReference = json["result"]["photos"][0]["photo_reference"].stringValue
+                
+            }.ensure {
+                
+                self.setUpImage()
+                
+            }.catch {error in
+                
+                print(error)
+        }
+    }
+    
+    
+    
+    // MARK: - Parsing data
+    
     func updateWeatherData(with json: JSON){
         
         if let temp = json["main"]["temp"].double {
             weather.temperature = Int(temp - 273)
             weather.city = json["name"].stringValue
             weather.condition = json["weather"][0]["id"].intValue
+            
+            checkForPhotoReference(for: weather.city)
             
             updateUIWithWeatherData()
         }
@@ -168,26 +183,56 @@ class WeatherViewController: UIViewController
             switchCityVC.dataFetcher = dataFetcher
         }
     }
-
+    
+    
+    
+    
+    func setUpImage() {
+        
+        guard self.weather.photoReference.count > 0 else {
+            
+            backgroundImageView.image = UIImage(named: "cityNotFound")
+            
+            showImage()
+            
+            return
+        }
+        
+        spinner.startAnimating()
+        
+        dataFetcher.fetchPlacePhotos(for: weather.photoReference).done { image in
+            
+            self.backgroundImageView.image = image
+            
+            self.showImage()
+            
+            }.ensure {
+                
+                self.spinner.stopAnimating()
+                
+            }.catch { error in
+                
+                print("Error unable to get photo with specific reference : \(self.weather.photoReference) /n Error: \(error) ")
+        }
+    }
 }
 
 
 // MARK: - ChangeCity delegate methods
 
+
+
 extension WeatherViewController: ChangeCityDelegate {
-    func updatePhotoReference(reference: String) {
-        weather.photoReference = reference
-        
-        dataFetcher.fetchPlacePhotos(for: weather.photoReference!).done { image in
-            
-            self.backgroundImageView.image = image
-        }
-        
-        
-    }
     
-    func userEnteredNewCity(cityJson: JSON) {
-        updateWeatherData(with: cityJson)
+    func userEnteredNewCity(weatherForCityJson: JSON) {
+        
+        backgroundImageView.image = nil
+        
+        backgroundImageView.alpha = 0
+        
+        weather.photoReference = ""
+        
+        updateWeatherData(with: weatherForCityJson)
     }
 }
 
@@ -210,3 +255,5 @@ enum LocationMethod {
     case userLocation(CLLocation)
     case city(String)
 }
+
+

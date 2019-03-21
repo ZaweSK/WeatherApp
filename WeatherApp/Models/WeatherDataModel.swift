@@ -14,7 +14,7 @@ struct WeatherDataModel {
     var city: String = ""
     var temperature: Int = 0
     var weatherIconName: String = ""
-    var photoReference: String?
+    var photoReference: String = ""
     
     
     var condition: Int = 0 {
