@@ -62,38 +62,6 @@ class DataFetcher {
         }
     }
     
-    
-    
-    //    private func getGoogleWebServiceURL(for webService: GoogleWebService, city: String?  = nil)->URL?{
-    //
-    //        switch webService {
-    //
-    //        case .placeDetails:
-    //
-    //            break
-    //
-    //
-    //        case .placePhotos: break
-    //
-    //        case .placeSearch:
-    //
-    //            guard let cityName = city else { return nil}
-    //
-    //            let params = [
-    //                "inputtype" : "textquery",
-    //                "input" : cityName,
-    //                "key" : googleWebService_APP_ID
-    //            ]
-    //
-    //            let url = createURL(with: webService.rawValue, params)
-    //
-    //            return url
-    //
-    //        }
-    //        return nil
-    //    }
-    //
-    
     private func createURL(with urlString: String, _ params: [String:String])->URL{
         
         var urlComponents = URLComponents(string: urlString)!

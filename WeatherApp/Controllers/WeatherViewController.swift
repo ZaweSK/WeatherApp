@@ -130,8 +130,6 @@ class WeatherViewController: UIViewController
                 print("Error unable to get photo with specific reference : \(self.weather.photoReference) /n Error: \(error) ")
         }
     }
-
-    
     
     // MARK: - @IBOutlets & @IBActions
     
@@ -200,8 +198,6 @@ class WeatherViewController: UIViewController
         }
     }
     
-    
-    
     // MARK: - Parsing data
     
     func updateWeatherData(with json: JSON){
@@ -268,7 +264,6 @@ extension WeatherViewController: CLLocationManagerDelegate
             getWeatherData(for: .userLocation(currentLocation))
         }
     }
-    
     
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {

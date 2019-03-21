@@ -48,6 +48,10 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
    
     @IBOutlet var getWeatherButton: UIButton!
     
+    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        cityTextField.endEditing(true)
+    }
+    
     @IBAction func getWeather(_ sender: UIButton) {
         
         let cityName = cityTextField.text!
@@ -68,6 +72,8 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
                 self.reactionToInvalidCity(with: cityName)
         }
     }
+    
+    // MARK: - UI methods
     
     func reactionToInvalidCity(with cityName: String){
         
@@ -144,10 +150,6 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cityTextField.resignFirstResponder()
         return true
-    }
-    
-    @IBAction func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        cityTextField.endEditing(true)
     }
     
 }
