@@ -184,7 +184,6 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="switchCity:" destination="KlR-xe-lBC" eventType="touchUpInside" id="Vij-zj-wTh"/>
                                     <segue destination="RY1-UR-E7Q" kind="show" identifier="switchCity" id="u0V-o5-UY1"/>
                                 </connections>
                             </button>

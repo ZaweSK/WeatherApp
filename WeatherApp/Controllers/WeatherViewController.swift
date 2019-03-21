@@ -19,11 +19,42 @@ class WeatherViewController: UIViewController
     
     var locationManager = CLLocationManager()
     
+    var imageStore = ImageStore()
     
     var weather = WeatherDataModel()
     var dataFetcher = DataFetcher()
     
     var UIElements = [UIView]()
+    
+    // MARK: - View Controller Life cycle methods
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.weatherViewController = self
+        
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestAlwaysAuthorization()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        UIElements = [switchCityButton, tempLabel, cityLabel]
+        backgroundImageView.alpha = 0
+        
+        hideElements()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        weatherConditionCenterX.constant = -view.bounds.width / 2
+        weatherConditionPadding.isActive = false
+        
+        view.layoutIfNeeded()
+    }
     
     // MARK: - UIConfiguration methods
     
@@ -54,50 +85,6 @@ class WeatherViewController: UIViewController
         showElements()
     }
     
-    
-    // MARK: - View Controller Life cycle methods
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.weatherViewController = self
-
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        locationManager.requestAlwaysAuthorization()
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-        
-        UIElements = [switchCityButton, tempLabel, cityLabel]
-        backgroundImageView.alpha = 0
-        
-        hideElements()
-    }
-    
-    @IBOutlet var weatherConditionCenterX: NSLayoutConstraint!
-    @IBOutlet var weatherConditionPadding: NSLayoutConstraint!
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        weatherConditionCenterX.constant = -view.bounds.width / 2
-        weatherConditionPadding.isActive = false
-        
-        view.layoutIfNeeded()
-    }
-    
-    
     func showImage(){
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -119,29 +106,51 @@ class WeatherViewController: UIViewController
         })
     }
     
-    func animateWeatherCondition(){
+    func setUpImage() {
         
+        guard self.weather.photoReference.count > 0 else {
+            
+            backgroundImageView.image = UIImage(named: "cityNotFound")
+            
+            showImage()
+            
+            return
+        }
+        
+        dataFetcher.fetchPlacePhotos(for: weather.photoReference).done { image in
+            
+            self.imageStore.setImage(image, forKey: self.weather.city)
+            
+            self.backgroundImageView.image = image
+            
+            self.showImage()
+            
+            }.catch { error in
+                
+                print("Error unable to get photo with specific reference : \(self.weather.photoReference) /n Error: \(error) ")
+        }
     }
+
     
     
     // MARK: - @IBOutlets & @IBActions
     
     @IBOutlet var spinner: UIActivityIndicatorView!
     
-    @IBAction func switchCity(_ sender: UIButton) {
-    }
-    
     @IBOutlet var switchCityButton: UIButton!
-    
     
     @IBOutlet var tempLabel: UILabel!
     
     @IBOutlet var cityLabel: UILabel!
     
     @IBOutlet var weatherConditionImageVIew: UIImageView!
-
+    
+    @IBOutlet var weatherConditionCenterX: NSLayoutConstraint!
+    
+    @IBOutlet var weatherConditionPadding: NSLayoutConstraint!
     
     @IBOutlet var backgroundImageView: UIImageView!
+    
     
     // MARK: - data fetching
     
@@ -202,7 +211,16 @@ class WeatherViewController: UIViewController
             weather.city = json["name"].stringValue
             weather.condition = json["weather"][0]["id"].intValue
             
-            checkForPhotoReference(for: weather.city)
+            if let imageFromCache = imageStore.image(forKey: weather.city){
+                
+                backgroundImageView.image = imageFromCache
+                
+                showImage()
+                
+            }else {
+                
+                checkForPhotoReference(for: weather.city)
+            }
             
             updateUIWithWeatherData()
         }
@@ -218,40 +236,10 @@ class WeatherViewController: UIViewController
             switchCityVC.dataFetcher = dataFetcher
         }
     }
-    
-    
-    
-    
-    func setUpImage() {
-        
-        guard self.weather.photoReference.count > 0 else {
-            
-            backgroundImageView.image = UIImage(named: "cityNotFound")
-            
-            showImage()
-            
-            return
-        }
-        
-        
-        
-        dataFetcher.fetchPlacePhotos(for: weather.photoReference).done { image in
-            
-            self.backgroundImageView.image = image
-            
-            self.showImage()
-                
-            }.catch { error in
-                
-                print("Error unable to get photo with specific reference : \(self.weather.photoReference) /n Error: \(error) ")
-        }
-    }
 }
 
 
 // MARK: - ChangeCity delegate methods
-
-
 
 extension WeatherViewController: ChangeCityDelegate {
     
