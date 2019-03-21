@@ -9,9 +9,11 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import PromiseKit
 
 protocol ChangeCityDelegate{
     func userEnteredNewCity(cityJson: JSON)
+    func updatePhotoReference(reference: String)
 }
 
 class SwitchCityViewController: UIViewController, UITextFieldDelegate
@@ -60,11 +62,10 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
             return
         }
         
-        photoFromGoogle(for: cityName )
         
+        dataFetcher.fetchWeatherData(for: .city(cityName)).done { json in
         
-
-        dataFetcher.fetchData(for: .city(cityName)).done { json in
+            self.photoFromGoogle(for: cityName )
             
             self.delegate?.userEnteredNewCity(cityJson: json)
             self.dismiss(animated: true, completion: nil)
@@ -156,49 +157,58 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
         cityTextField.endEditing(true)
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     func photoFromGoogle(for city: String){
         
         
+        firstly {
+            
+            self.dataFetcher!.fetchPlaceId(for: city)
+            
+            }.then { json -> Promise<JSON> in
+                
+                let placeId = json["candidates"][0]["place_id"].stringValue
+                
+                print(placeId)
+                
+                return self.dataFetcher.fetchPlaceDetails(for: placeId)
+                
+            }.done { json in
+                
+              let photoReference = json["result"]["photos"][0]["photo_reference"].stringValue
+                
+              self.delegate?.updatePhotoReference(reference: photoReference)
+                
+            }.catch {error in
+                
+                print(error)
+                
+        }
+        
 
-//        https://maps.googleapis.com/maps/api/place/findplacefromtext/json?inputtype=textquery&input=London&key=AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14
+//       let urlString = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
+//
+//        let params = [
+//            "inputtype" : "textquery",
+//            "input" : city,
+//            "key" : "AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14"
+//        ]
+//
+//        Alamofire.request(urlString, method: .get, parameters: params).responseJSON(){ response in
+//
+//            print(response.request )
+//            switch response.result{
+//
+//
+//            case .success(let value):
+//                print(value)
+//            case .failure(let error):
+//                print(error)
+//            }
+//
+//        }
       
 
     }

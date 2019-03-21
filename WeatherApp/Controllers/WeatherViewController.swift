@@ -74,6 +74,39 @@ class WeatherViewController: UIViewController
         hideElements()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+//        backgroundImageView.alpha = 0
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print(#function)
+        
+//        if let photo = weather.photoReference {
+//
+//            dataFetcher.fetchPlacePhotos(for: photo).done { image in
+//
+//                    self.backgroundImageView.image = image
+//
+//                }.catch { error in
+//
+//                    print(error)
+//            }
+//        }
+    }
+    
+    func updateImage(with image: UIImage){
+        
+//        backgroundImageView.image = image
+//
+//        UIView.animate(withDuration: 0.5, delay: 0, options: [], animations: {
+//
+//            self.backgroundImageView.alpha = 1
+//
+//        }, completion: nil)
+        
+    }
+    
     
     // MARK: - @IBOutlets & @IBActions
     
@@ -92,6 +125,7 @@ class WeatherViewController: UIViewController
     @IBOutlet var imageVIew: UIImageView!
 
     
+    @IBOutlet var backgroundImageView: UIImageView!
     
     // MARK: - Weather data fetching & Parsing
     
@@ -100,7 +134,7 @@ class WeatherViewController: UIViewController
         
         spinner.startAnimating()
         
-        dataFetcher.fetchData(for: locationMethod).done { json in
+        dataFetcher.fetchWeatherData(for: locationMethod).done { json in
             
             self.updateWeatherData(with: json)
             
@@ -141,6 +175,17 @@ class WeatherViewController: UIViewController
 // MARK: - ChangeCity delegate methods
 
 extension WeatherViewController: ChangeCityDelegate {
+    func updatePhotoReference(reference: String) {
+        weather.photoReference = reference
+        
+        dataFetcher.fetchPlacePhotos(for: weather.photoReference!).done { image in
+            
+            self.backgroundImageView.image = image
+        }
+        
+        
+    }
+    
     func userEnteredNewCity(cityJson: JSON) {
         updateWeatherData(with: cityJson)
     }
