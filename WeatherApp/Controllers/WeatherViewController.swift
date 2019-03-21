@@ -66,6 +66,7 @@ class WeatherViewController: UIViewController
 
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        locationManager.requestAlwaysAuthorization()
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
@@ -78,6 +79,13 @@ class WeatherViewController: UIViewController
     @IBOutlet var weatherConditionCenterX: NSLayoutConstraint!
     @IBOutlet var weatherConditionPadding: NSLayoutConstraint!
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+        
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -272,6 +280,36 @@ extension WeatherViewController: CLLocationManagerDelegate
             getWeatherData(for: .userLocation(currentLocation))
         }
     }
+    
+    
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        switch(CLLocationManager.authorizationStatus())  {
+            
+        case .denied:
+            
+            let alertController = UIAlertController(title: "Allow location services",
+                                                    message: nil,
+                                                    preferredStyle: .alert)
+            
+            let settingsAction = UIAlertAction(title: "Settings", style: .default) { (alertAction) in
+                
+                if let appSettings = NSURL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.openURL(appSettings as URL)
+                }
+            }
+            alertController.addAction(settingsAction)
+            
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            alertController.addAction(cancelAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        default: break
+        }
+    }
+    
 }
 
 enum LocationMethod {

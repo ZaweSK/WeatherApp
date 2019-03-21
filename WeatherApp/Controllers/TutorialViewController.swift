@@ -78,7 +78,7 @@ class TutorialViewController: UIViewController,TutorialPageViewControllerDelegat
             
             UserDefaults.standard.set(true, forKey: "introductionComplete")
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                 self.animateDissapearance() {
                     self.performSegue(withIdentifier: "goToWeather", sender: self)
                 }
