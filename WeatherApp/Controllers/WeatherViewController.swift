@@ -47,7 +47,7 @@ class WeatherViewController: UIViewController
         cityLabel.text = weather.city
         
         if let image = UIImage(named: weather.weatherIconName) {
-            imageVIew.image = image
+            weatherConditionImageVIew.image = image
         }
         
         spinner.stopAnimating()
@@ -69,10 +69,24 @@ class WeatherViewController: UIViewController
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
         
-        UIElements = [switchCityButton, tempLabel, cityLabel, imageVIew]
+        UIElements = [switchCityButton, tempLabel, cityLabel]
         backgroundImageView.alpha = 0
         
         hideElements()
+    }
+    
+    @IBOutlet var weatherConditionCenterX: NSLayoutConstraint!
+    @IBOutlet var weatherConditionPadding: NSLayoutConstraint!
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+        weatherConditionCenterX.constant = -view.bounds.width / 2
+        weatherConditionPadding.isActive = false
+        
+        view.layoutIfNeeded()
     }
     
     
@@ -84,7 +98,20 @@ class WeatherViewController: UIViewController
 
             self.backgroundImageView.alpha = 1
 
-        }, completion: nil)
+        }, completion: { _ in
+            
+            
+            self.weatherConditionCenterX.constant = 0
+            self.weatherConditionPadding.isActive = true
+            
+            UIView.animate(withDuration: 0.5, delay: 0.3, options: .curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+                
+            }, completion: nil)
+        })
+    }
+    
+    func animateWeatherCondition(){
         
     }
     
@@ -103,7 +130,7 @@ class WeatherViewController: UIViewController
     
     @IBOutlet var cityLabel: UILabel!
     
-    @IBOutlet var imageVIew: UIImageView!
+    @IBOutlet var weatherConditionImageVIew: UIImageView!
 
     
     @IBOutlet var backgroundImageView: UIImageView!
@@ -198,17 +225,13 @@ class WeatherViewController: UIViewController
             return
         }
         
-        spinner.startAnimating()
+        
         
         dataFetcher.fetchPlacePhotos(for: weather.photoReference).done { image in
             
             self.backgroundImageView.image = image
             
             self.showImage()
-            
-            }.ensure {
-                
-                self.spinner.stopAnimating()
                 
             }.catch { error in
                 
