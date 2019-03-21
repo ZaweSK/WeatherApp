@@ -218,7 +218,7 @@ class WeatherViewController: UIViewController
                 showImage()
                 
             }else {
-                
+        
                 checkForPhotoReference(for: weather.city)
             }
             
