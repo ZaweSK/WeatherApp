@@ -232,6 +232,26 @@ class WeatherViewController: UIViewController
             switchCityVC.dataFetcher = dataFetcher
         }
     }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
+            
+        case (.compact, .compact):
+            print("landscape")
+            cityLabel.textAlignment = .left
+        case(.compact,.regular):
+            print("portrait")
+            cityLabel.textAlignment = .center
+        default: break
+            
+        }
+        
+       
+        
+    }
 }
 
 
