@@ -3,7 +3,7 @@
 ## Overview
 App shows user weather conditions for his location. User can also change the location he wishes to see the weather conditions for. Every location is also presented with an image received from GooglePlaces API. If the image is not available, placeholder image is presented. Images are being cached and saved to the filesystem.
 
-![](weatherApp.gif)
+![](weatherApp2.gif)
 ![](weatherApp_storyboard.png)
 
 
