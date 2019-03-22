@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,11 +15,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="TutorialViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5T2-1r-tih">
-                                <rect key="frame" x="16" y="16" width="635" height="309"/>
+                                <rect key="frame" x="16" y="36" width="343" height="581"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="YES"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -31,7 +31,7 @@
                                 </connections>
                             </containerView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="arz-bV-MNZ">
-                                <rect key="frame" x="314" y="335" width="39" height="37"/>
+                                <rect key="frame" x="168" y="627" width="39" height="37"/>
                                 <color key="pageIndicatorTintColor" red="0.15686274510000001" green="0.66666666669999997" blue="0.75294117650000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </pageControl>
                         </subviews>
@@ -61,20 +61,20 @@
             <objects>
                 <viewController id="RY1-UR-E7Q" customClass="SwitchCityViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ubP-DT-DbE">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x7H-1d-sds">
-                                <rect key="frame" x="0.0" y="94" width="667" height="187.5"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="333.5"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter City Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cDG-Vw-SCN">
-                                        <rect key="frame" x="133.5" y="78.5" width="400" height="30"/>
+                                        <rect key="frame" x="75" y="152" width="225" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" smartInsertDeleteType="no"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tiN-xJ-58j">
-                                        <rect key="frame" x="245" y="129.5" width="177" height="42"/>
+                                        <rect key="frame" x="99" y="203" width="177" height="42"/>
                                         <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="30"/>
                                         <state key="normal" title="Get Weather">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -84,7 +84,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TX0-5X-iJf">
-                                        <rect key="frame" x="10" y="10" width="33.5" height="20.5"/>
+                                        <rect key="frame" x="10" y="10" width="37.5" height="36.5"/>
                                         <state key="normal" title="Button" image="backArrow"/>
                                         <connections>
                                             <action selector="goBack:" destination="RY1-UR-E7Q" eventType="touchUpInside" id="nWd-zj-Bmd"/>
@@ -162,7 +162,7 @@
             <objects>
                 <viewController storyboardIdentifier="Weather" id="KlR-xe-lBC" customClass="WeatherViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="R3A-lu-rx2">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="UnX-lf-uwy">
@@ -171,19 +171,19 @@
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4yW-PF-TBJ">
-                                <rect key="frame" x="0.0" y="25" width="667" height="225"/>
+                                <rect key="frame" x="0.0" y="110.5" width="375" height="366"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TRQ-fk-hFr">
-                                <rect key="frame" x="0.0" y="250" width="667" height="125"/>
+                                <rect key="frame" x="0.0" y="476.5" width="375" height="190.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Banovce Nad bebravou" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lNl-Po-VdA">
-                                        <rect key="frame" x="33.5" y="39.5" width="600" height="45"/>
+                                        <rect key="frame" x="19" y="64" width="337.5" height="90"/>
                                         <fontDescription key="fontDescription" name="HiraMinProN-W6" family="Hiragino Mincho ProN" pointSize="45"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21° C" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hmh-Uz-P0x">
-                                        <rect key="frame" x="561" y="10" width="90" height="35.5"/>
+                                        <rect key="frame" x="269" y="10" width="90" height="35.5"/>
                                         <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="35"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
@@ -198,10 +198,10 @@
                                 </constraints>
                             </view>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:8MV-yt-Qr9:image" translatesAutoresizingMaskIntoConstraints="NO" id="8MV-yt-Qr9">
-                                <rect key="frame" x="16" y="210.5" width="233.5" height="79"/>
+                                <rect key="frame" x="16" y="412.5" width="131.5" height="128"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="bottom" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CsP-nA-JyH">
-                                <rect key="frame" x="317.5" y="-12" width="333.5" height="32"/>
+                                <rect key="frame" x="171.5" y="73.5" width="187.5" height="32"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="20"/>
                                 <state key="normal" title="Switch city">
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -263,11 +263,11 @@
             <objects>
                 <viewController storyboardIdentifier="island1" id="lvl-yp-sxW" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ds3-0i-dFK">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island" translatesAutoresizingMaskIntoConstraints="NO" id="3UU-tG-HmY">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="NO"/>
@@ -277,7 +277,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi there, I see you are interested in some weather info." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAZ-Tb-fe4">
-                                <rect key="frame" x="66.5" y="79" width="534" height="17"/>
+                                <rect key="frame" x="37.5" y="216.5" width="300" height="34"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -289,11 +289,23 @@
                             <constraint firstAttribute="trailing" secondItem="3UU-tG-HmY" secondAttribute="trailing" id="GVa-Oa-ohw"/>
                             <constraint firstItem="TAZ-Tb-fe4" firstAttribute="centerX" secondItem="ds3-0i-dFK" secondAttribute="centerX" id="LWP-7i-C0n"/>
                             <constraint firstItem="TAZ-Tb-fe4" firstAttribute="width" secondItem="3UU-tG-HmY" secondAttribute="width" multiplier="0.8" id="MHP-d3-OG9"/>
+                            <constraint firstItem="TAZ-Tb-fe4" firstAttribute="centerY" secondItem="ds3-0i-dFK" secondAttribute="centerY" id="dIG-oo-bAR"/>
                             <constraint firstItem="3UU-tG-HmY" firstAttribute="leading" secondItem="ds3-0i-dFK" secondAttribute="leading" id="e7i-rG-GsI"/>
                             <constraint firstItem="3UU-tG-HmY" firstAttribute="top" secondItem="ds3-0i-dFK" secondAttribute="top" id="exZ-Jp-jWj"/>
                             <constraint firstAttribute="bottom" secondItem="3UU-tG-HmY" secondAttribute="bottom" id="iEy-7i-MsU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Akv-7W-W60"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dIG-oo-bAR"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="4BF-J4-MW4"/>
+                                <include reference="dIG-oo-bAR"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HdI-d2-2yD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -305,11 +317,11 @@
             <objects>
                 <viewController storyboardIdentifier="island2" id="zKM-eR-EiB" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="L5D-k0-L68">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island2" translatesAutoresizingMaskIntoConstraints="NO" id="H7b-Ed-a5D">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -319,7 +331,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Luckily for you, I can help with that." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilR-hA-Lyr">
-                                <rect key="frame" x="66.5" y="79" width="534" height="17"/>
+                                <rect key="frame" x="37.5" y="225" width="300" height="17"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -328,6 +340,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="H7b-Ed-a5D" firstAttribute="leading" secondItem="L5D-k0-L68" secondAttribute="leading" id="02X-j2-ZTp"/>
+                            <constraint firstItem="ilR-hA-Lyr" firstAttribute="centerY" secondItem="L5D-k0-L68" secondAttribute="centerY" id="4ga-eD-vb4"/>
                             <constraint firstItem="ilR-hA-Lyr" firstAttribute="centerY" secondItem="L5D-k0-L68" secondAttribute="centerY" constant="-100" id="D6K-bV-crA"/>
                             <constraint firstItem="H7b-Ed-a5D" firstAttribute="top" secondItem="L5D-k0-L68" secondAttribute="top" id="Ej4-Mh-Dav"/>
                             <constraint firstItem="ilR-hA-Lyr" firstAttribute="centerX" secondItem="L5D-k0-L68" secondAttribute="centerX" id="Kbu-8J-fNp"/>
@@ -336,6 +349,17 @@
                             <constraint firstItem="ilR-hA-Lyr" firstAttribute="width" secondItem="H7b-Ed-a5D" secondAttribute="width" multiplier="0.8" id="yMl-BL-gbO"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="q9i-CA-cMX"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4ga-eD-vb4"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <include reference="4ga-eD-vb4"/>
+                                <exclude reference="D6K-bV-crA"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G8E-cU-1MY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -347,11 +371,11 @@
             <objects>
                 <viewController storyboardIdentifier="island3" id="iZg-bI-w4l" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XDq-EV-EQ4">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="island3" translatesAutoresizingMaskIntoConstraints="NO" id="0TP-83-zQK">
-                                <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="shadow" value="NO"/>
@@ -361,7 +385,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I just need to know where you are..." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aHC-tu-Xez">
-                                <rect key="frame" x="297" y="70.5" width="233" height="34"/>
+                                <rect key="frame" x="202" y="208" width="131" height="51"/>
                                 <fontDescription key="fontDescription" name="HiraMinProN-W3" family="Hiragino Mincho ProN" pointSize="17"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -376,8 +400,24 @@
                             <constraint firstAttribute="bottom" secondItem="0TP-83-zQK" secondAttribute="bottom" id="cGY-HD-UX3"/>
                             <constraint firstItem="aHC-tu-Xez" firstAttribute="centerX" secondItem="XDq-EV-EQ4" secondAttribute="centerX" constant="80" id="ghC-4C-eCa"/>
                             <constraint firstItem="0TP-83-zQK" firstAttribute="top" secondItem="XDq-EV-EQ4" secondAttribute="top" id="kAs-2i-cwd"/>
+                            <constraint firstItem="aHC-tu-Xez" firstAttribute="centerY" secondItem="XDq-EV-EQ4" secondAttribute="centerY" id="xAj-Or-dvK"/>
+                            <constraint firstItem="aHC-tu-Xez" firstAttribute="centerX" secondItem="XDq-EV-EQ4" secondAttribute="centerX" constant="170" id="z1u-eI-Yhd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="eXX-GL-aoL"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="xAj-Or-dvK"/>
+                                <exclude reference="z1u-eI-Yhd"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=compact">
+                            <mask key="constraints">
+                                <exclude reference="M6k-no-Hfd"/>
+                                <exclude reference="ghC-4C-eCa"/>
+                                <include reference="xAj-Or-dvK"/>
+                                <include reference="z1u-eI-Yhd"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ot7-XE-zDg" userLabel="First Responder" sceneMemberID="firstResponder"/>
