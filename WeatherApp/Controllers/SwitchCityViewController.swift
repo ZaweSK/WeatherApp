@@ -12,7 +12,7 @@ import SwiftyJSON
 import PromiseKit
 
 protocol ChangeCityDelegate{
-    func userEnteredNewCity(weatherForCityJson: JSON)
+    func userEnteredNewCity(viewModel: WeatherViewModel)
 }
 
 class SwitchCityViewController: UIViewController, UITextFieldDelegate
@@ -61,9 +61,11 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
             return
         }
         
-        dataFetcher.fetchWeatherData(for: .city(cityName)).done { json in
+        dataFetcher.fetchWeatherData2(for: .city(cityName)).done { data in
             
-            self.delegate?.userEnteredNewCity(weatherForCityJson: json)
+            let weatherVM = try JSONDecoder().decode(WeatherViewModel.self, from: data)
+            
+            self.delegate?.userEnteredNewCity(viewModel: weatherVM)
             
             self.dismiss(animated: true, completion: nil)
             

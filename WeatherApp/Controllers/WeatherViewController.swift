@@ -88,6 +88,28 @@ class WeatherViewController: UIViewController
         showElements()
     }
     
+    func hideWeatherConditions() {
+        weatherConditionCenterX.constant = -view.bounds.width / 2
+        weatherConditionPadding.isActive = false
+        view.layoutIfNeeded()
+    }
+    
+    func updateUIWithWeatherData2(){
+        
+        guard let weatherModel = weatherViewModel else {return}
+        
+        tempLabel.text = String(weatherModel.temperature.current.asCelsius)
+        cityLabel.text = weatherModel.name
+        
+        if let image = UIImage(named: weatherModel.conditions.first!.weatherIconName) {
+            weatherConditionImageVIew.image = image
+        }
+        
+        spinner.stopAnimating()
+        showElements()
+    }
+    
+    
     func showImage(){
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
@@ -164,14 +186,24 @@ class WeatherViewController: UIViewController
         dataFetcher.fetchWeatherData2(for: locationMethod).done { data in
             
             do {
-              self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
-
+                self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
+                print(self.weatherViewModel)
+                
+                self.updateUIWithWeatherData2()
+                self.setUpCityImage()
+                
             } catch {
                 print(error)
             }
             
             
             
+            }.catch { error in
+                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(alertAction)
+                self.present(alertController, animated: true, completion: nil)
+                
         }
         
         
@@ -241,6 +273,21 @@ class WeatherViewController: UIViewController
         }
     }
     
+    func setUpCityImage(){
+        guard let weatherVM = weatherViewModel else { return}
+        
+        if let imageFromCache = imageStore.image(forKey: weatherVM.name){
+            
+            backgroundImageView.image = imageFromCache
+            
+            showImage()
+            
+        }else {
+            
+            checkForPhotoReference(for: weatherVM.name)
+        }
+    }
+    
     
     // MARK: - NAvigation
     
@@ -278,15 +325,19 @@ class WeatherViewController: UIViewController
 
 extension WeatherViewController: ChangeCityDelegate {
     
-    func userEnteredNewCity(weatherForCityJson: JSON) {
+    func userEnteredNewCity(viewModel: WeatherViewModel) {
+        
+        hideWeatherConditions()
         
         backgroundImageView.image = nil
         
         backgroundImageView.alpha = 0
         
-        weather.photoReference = ""
+        weatherViewModel = viewModel
         
-        updateWeatherData(with: weatherForCityJson)
+        updateUIWithWeatherData2()
+        
+        setUpCityImage()
     }
 }
 

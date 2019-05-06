@@ -42,7 +42,8 @@ class DataFetcher {
             
             let params : [String:String] = [
                 "q" : cityName,
-                "appid" : openWeatherMap_APP_ID
+                "appid" : openWeatherMap_APP_ID,
+                "units" : "metric"
             ]
             
             return params
@@ -55,7 +56,8 @@ class DataFetcher {
             let params: [String:String] = [
                 "lat" : latitude,
                 "lon" : longitude,
-                "appid" : openWeatherMap_APP_ID
+                "appid" : openWeatherMap_APP_ID,
+                 "units" : "metric"
             ]
             
             return params
