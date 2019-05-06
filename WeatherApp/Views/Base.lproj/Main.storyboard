@@ -293,24 +293,25 @@
                         <viewLayoutGuide key="safeArea" id="wMA-1I-fAQ"/>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="3Xs-rR-BJ0"/>
                                 <exclude reference="O98-pA-GSO"/>
                                 <exclude reference="Yl1-VL-7xy"/>
                                 <exclude reference="aTR-u9-1xk"/>
                                 <exclude reference="ayX-l1-tQc"/>
-                                <exclude reference="0jX-h4-huY"/>
-                                <exclude reference="1O2-BU-yvX"/>
-                                <exclude reference="8CV-ez-DmN"/>
-                                <exclude reference="D1e-99-4hH"/>
-                                <exclude reference="3Xs-rR-BJ0"/>
                                 <exclude reference="gdL-o9-BQi"/>
                                 <exclude reference="Yhb-ct-kUH"/>
                                 <exclude reference="ZqI-XW-fVS"/>
                                 <exclude reference="tmp-if-CPe"/>
                                 <exclude reference="uyT-YO-8p9"/>
+                                <exclude reference="0jX-h4-huY"/>
+                                <exclude reference="1O2-BU-yvX"/>
+                                <exclude reference="8CV-ez-DmN"/>
+                                <exclude reference="D1e-99-4hH"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
+                                <include reference="3Xs-rR-BJ0"/>
                                 <exclude reference="1Si-jq-kcp"/>
                                 <exclude reference="CAj-9L-HX3"/>
                                 <exclude reference="Eec-Kj-mUf"/>
@@ -319,18 +320,6 @@
                                 <include reference="aTR-u9-1xk"/>
                                 <include reference="ayX-l1-tQc"/>
                                 <exclude reference="lyK-D8-6SM"/>
-                                <include reference="0jX-h4-huY"/>
-                                <include reference="1O2-BU-yvX"/>
-                                <include reference="8CV-ez-DmN"/>
-                                <exclude reference="Cr0-DG-NwL"/>
-                                <include reference="D1e-99-4hH"/>
-                                <exclude reference="I8A-mg-QfI"/>
-                                <exclude reference="b46-wJ-cm2"/>
-                                <exclude reference="gat-p6-oie"/>
-                                <exclude reference="y38-r5-CfQ"/>
-                                <include reference="3Xs-rR-BJ0"/>
-                                <exclude reference="B8b-6T-BDm"/>
-                                <exclude reference="Qtu-nl-Roj"/>
                                 <exclude reference="CWa-bB-OwB"/>
                                 <exclude reference="biy-TZ-gSp"/>
                                 <include reference="gdL-o9-BQi"/>
@@ -343,6 +332,17 @@
                                 <exclude reference="nfz-74-IbL"/>
                                 <include reference="tmp-if-CPe"/>
                                 <include reference="uyT-YO-8p9"/>
+                                <include reference="0jX-h4-huY"/>
+                                <include reference="1O2-BU-yvX"/>
+                                <include reference="8CV-ez-DmN"/>
+                                <exclude reference="Cr0-DG-NwL"/>
+                                <include reference="D1e-99-4hH"/>
+                                <exclude reference="I8A-mg-QfI"/>
+                                <exclude reference="b46-wJ-cm2"/>
+                                <exclude reference="gat-p6-oie"/>
+                                <exclude reference="y38-r5-CfQ"/>
+                                <exclude reference="B8b-6T-BDm"/>
+                                <exclude reference="Qtu-nl-Roj"/>
                             </mask>
                         </variation>
                     </view>

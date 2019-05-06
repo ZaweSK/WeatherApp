@@ -22,6 +22,9 @@ class WeatherViewController: UIViewController
     var imageStore = ImageStore()
     
     var weather = WeatherDataModel()
+    
+    var weatherViewModel : WeatherViewModel?
+    
     var dataFetcher = DataFetcher()
     
     var UIElements = [UIView]()
@@ -156,17 +159,33 @@ class WeatherViewController: UIViewController
         
         spinner.startAnimating()
         
-        dataFetcher.fetchWeatherData(for: locationMethod).done { json in
+        
+        
+        dataFetcher.fetchWeatherData2(for: locationMethod).done { data in
             
-            self.updateWeatherData(with: json)
+            do {
+              self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
+
+            } catch {
+                print(error)
+            }
             
-            }.catch {error in
-                
-                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alertController.addAction(alertAction)
-                self.present(alertController, animated: true, completion: nil)
+            
+            
         }
+        
+        
+//        dataFetcher.fetchWeatherData(for: locationMethod).done { json in
+//
+//            self.updateWeatherData(with: json)
+//
+//            }.catch {error in
+//
+//                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+//                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+//                alertController.addAction(alertAction)
+//                self.present(alertController, animated: true, completion: nil)
+//        }
     }
     
     

@@ -91,6 +91,7 @@ class DataFetcher {
             
             Alamofire.request(openWeatherMapURL, method: .get, parameters: params).validate().responseJSON { response in
                 
+                print(response.request)
                 switch response.result {
                     
                 case .success(let json):
@@ -102,6 +103,29 @@ class DataFetcher {
             }
         }
     }
+    
+    //
+    func fetchWeatherData2(for method: LocationMethod)-> Promise<Data> {
+        
+        return Promise { seal in
+            
+            let params = getOpenWeatherMapParams(for: method)
+            
+            Alamofire.request(openWeatherMapURL, method: .get, parameters: params).validate().responseData() { response in
+                
+                print(response.request)
+                switch response.result {
+                    
+                case .success(let data):
+                    seal.fulfill(data)
+                    
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
     
     
     
