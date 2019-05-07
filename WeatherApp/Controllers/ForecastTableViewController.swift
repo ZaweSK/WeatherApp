@@ -46,7 +46,7 @@ class ForecastTableViewController: UITableViewController {
             let cityName = weatherViewModel?.name
             else {return}
         
-        dataFetcher.getForecastFor(for: .city(cityName)).done { data in
+        dataFetcher.getForecast(for: .city(cityName)).done { data in
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .secondsSince1970
             

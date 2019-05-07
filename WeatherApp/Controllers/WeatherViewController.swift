@@ -184,7 +184,7 @@ class WeatherViewController: UIViewController
         spinner.startAnimating()
         
         
-        dataFetcher.fetchWeatherData2(for: locationMethod).done { data in
+        dataFetcher.fetchWeatherData(for: locationMethod).done { data in
             
             do {
                 self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)

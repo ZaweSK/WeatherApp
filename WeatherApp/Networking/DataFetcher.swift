@@ -16,23 +16,28 @@ enum JSONError: Error {
     case generalError
 }
 
+enum ImageError : Error {
+    case unableToCreateImage
+}
+
 enum GoogleWebServiceError:Error{
     case wrongURL
 }
-
-enum GoogleWebService: String {
-    case placeSearch = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json"
-    case placeDetails = "https://maps.googleapis.com/maps/api/place/details/json?"
-    case placePhotos = "https://maps.googleapis.com/maps/api/place/photo?"
-}
+ 
 
 class DataFetcher {
     
+    var googlePlacesSessionManager : SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.adapter = GooglePlacesAdapter()
+        return sessionManager
+    }()
     
-    let openWeatherMap_APP_ID = "ceb75d42efb0a329e2d5d1d6819032b1"
-    let openWeatherMapURL = "http://api.openweathermap.org/data/2.5/weather"
-    let googleWebService_APP_ID = "AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14"
-    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast"
+    var openWeatherSessionManager: SessionManager = {
+        let sessionManager = SessionManager()
+        sessionManager.adapter = OpeanWeatherAdapter()
+        return sessionManager
+    }()
     
     
     private func getOpenWeatherMapParams(for method: LocationMethod) -> [String:String]{
@@ -43,7 +48,6 @@ class DataFetcher {
             
             let params : [String:String] = [
                 "q" : cityName,
-                "appid" : openWeatherMap_APP_ID,
                 "units" : "metric"
             ]
             
@@ -57,7 +61,6 @@ class DataFetcher {
             let params: [String:String] = [
                 "lat" : latitude,
                 "lon" : longitude,
-                "appid" : openWeatherMap_APP_ID,
                  "units" : "metric"
             ]
             
@@ -86,37 +89,15 @@ class DataFetcher {
         return queryItems
     }
     
-    func fetchWeatherData(for method: LocationMethod)-> Promise<JSON> {
-        
-        return Promise { seal in
-            
-            let params = getOpenWeatherMapParams(for: method)
-            
-            Alamofire.request(openWeatherMapURL, method: .get, parameters: params).validate().responseJSON { response in
-                
-                print(response.request)
-                switch response.result {
-                    
-                case .success(let json):
-                    seal.fulfill(JSON(json))
-                    
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
-        }
-    }
-    
     //
-    func fetchWeatherData2(for method: LocationMethod)-> Promise<Data> {
+    func fetchWeatherData(for method: LocationMethod)-> Promise<Data> {
         
         return Promise { seal in
             
             let params = getOpenWeatherMapParams(for: method)
             
-            Alamofire.request(openWeatherMapURL, method: .get, parameters: params).validate().responseData() { response in
-                
-                print(response.request)
+            openWeatherSessionManager.request(WeatherRouter.weather(parameters: params)).validate().responseData() { response in
+    
                 switch response.result {
                     
                 case .success(let data):
@@ -130,25 +111,36 @@ class DataFetcher {
     }
     
     
-    
-    
     func fetchPlacePhotos(for reference: String)->Promise<UIImage>{
         
         return Promise { seal in
             
             let params = [
                 "photoreference" : reference,
-                "maxheight" : "800",
-                "key" : googleWebService_APP_ID
+                "maxheight" : "800"
             ]
             
-            let url = createURL(with: GoogleWebService.placePhotos.rawValue, params)
+            googlePlacesSessionManager.request(GoogleRouter.placePhotos(parameters: params)).validate().responseData() { response in
+                
+                
+                switch response.result {
+                    
+                case .success(let data):
+                  
+                    guard let image = UIImage(data: data) else {
+                        seal.reject(ImageError.unableToCreateImage)
+                        return
+                    }
+                    
+                    seal.fulfill(image)
+                    
+                    
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
             
-            guard let imageData =  try? Data(contentsOf: url) else {return}
-            
-            guard let image = UIImage(data: imageData) else {return}
-            
-            seal.fulfill(image)
+
         }
     }
     
@@ -158,15 +150,12 @@ class DataFetcher {
         
         return Promise { seal in
             
-            let url = GoogleWebService.placeDetails.rawValue
-            
             let params = [
-                "placeid" : id,
-                "key" : googleWebService_APP_ID
+                "placeid" : id
             ]
-            
-            Alamofire.request(url, method: .get, parameters: params).validate().responseJSON{ response in
-                
+        
+            googlePlacesSessionManager.request(GoogleRouter.placeDetails(parameters: params)).validate().responseJSON{ response in
+         
                 switch response.result {
                     
                 case .success(let json):
@@ -184,15 +173,12 @@ class DataFetcher {
         
         return Promise { seal in
             
-            let url = GoogleWebService.placeSearch.rawValue
-            
             let params = [
                 "inputtype" : "textquery",
-                "input" : city,
-                "key" : googleWebService_APP_ID
+                "input" : city
             ]
             
-            Alamofire.request(url, method: .get, parameters: params).validate().responseJSON{ response in
+            googlePlacesSessionManager.request(GoogleRouter.placeSearch(parameters: params)).validate().responseJSON{ response in
                 
                 switch response.result {
                     
@@ -208,14 +194,14 @@ class DataFetcher {
     
     
     
-    func getForecastFor(for method: LocationMethod)->Promise<Data>{
+    
+    func getForecast(for method: LocationMethod)->Promise<Data>{
         return Promise { seal in
             
             let params = getOpenWeatherMapParams(for: method)
             
-            Alamofire.request(forecastURL, method: .get, parameters: params).validate().responseData() { response in
-                
-                print(response.request)
+            openWeatherSessionManager.request(WeatherRouter.forecast(parameters: params)).validate().responseData() { response in
+           
                 switch response.result {
                     
                 case .success(let data):
@@ -227,7 +213,6 @@ class DataFetcher {
             }
         }
     }
-    
 }
 
 

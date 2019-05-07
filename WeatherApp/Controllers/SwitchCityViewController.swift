@@ -61,7 +61,7 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
             return
         }
         
-        dataFetcher.fetchWeatherData2(for: .city(cityName)).done { data in
+        dataFetcher.fetchWeatherData(for: .city(cityName)).done { data in
             
             let weatherVM = try JSONDecoder().decode(WeatherViewModel.self, from: data)
             

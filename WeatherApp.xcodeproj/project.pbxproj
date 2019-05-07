@@ -26,6 +26,9 @@
 		D019637F228052BF00DAE77D /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637E228052BF00DAE77D /* ForecastListViewModel.swift */; };
 		D019638322805E1800DAE77D /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019638222805E1800DAE77D /* Formatter.swift */; };
 		D019638522806A4600DAE77D /* DayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019638422806A4600DAE77D /* DayWeather.swift */; };
+		D01963882281591800DAE77D /* WeatherRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01963872281591800DAE77D /* WeatherRouter.swift */; };
+		D019638A2281604800DAE77D /* Adapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01963892281604800DAE77D /* Adapter.swift */; };
+		D019638C22816CB700DAE77D /* GoogleRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019638B22816CB600DAE77D /* GoogleRouter.swift */; };
 		D0595C2A2243C7CF00CD9FA5 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0595C292243C7CF00CD9FA5 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +56,9 @@
 		D019637E228052BF00DAE77D /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
 		D019638222805E1800DAE77D /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Formatter.swift; path = ../Formatter.swift; sourceTree = "<group>"; };
 		D019638422806A4600DAE77D /* DayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeather.swift; sourceTree = "<group>"; };
+		D01963872281591800DAE77D /* WeatherRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherRouter.swift; sourceTree = "<group>"; };
+		D01963892281604800DAE77D /* Adapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Adapter.swift; sourceTree = "<group>"; };
+		D019638B22816CB600DAE77D /* GoogleRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleRouter.swift; sourceTree = "<group>"; };
 		D0595C292243C7CF00CD9FA5 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -106,6 +112,7 @@
 		D01407B2223F6A400074263D /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				D0196386228158EE00DAE77D /* Networking */,
 				D01963752280419700DAE77D /* Cells */,
 				D01407D52240D80B0074263D /* Controllers */,
 				D01407D42240D8040074263D /* Views */,
@@ -147,7 +154,6 @@
 				D01407D62240DF4C0074263D /* SwitchCityViewController.swift */,
 				D01407CB223F95250074263D /* TutorialViewController.swift */,
 				D01407C9223F84C40074263D /* TutorialPageViewController.swift */,
-				D01407D82240EA450074263D /* DataFetcher.swift */,
 				D01963732280416300DAE77D /* ForecastTableViewController.swift */,
 				D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */,
 			);
@@ -160,6 +166,17 @@
 				D0196378228041D000DAE77D /* ForecastCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D0196386228158EE00DAE77D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				D01407D82240EA450074263D /* DataFetcher.swift */,
+				D01963872281591800DAE77D /* WeatherRouter.swift */,
+				D019638B22816CB600DAE77D /* GoogleRouter.swift */,
+				D01963892281604800DAE77D /* Adapter.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +309,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D01963742280416300DAE77D /* ForecastTableViewController.swift in Sources */,
+				D019638A2281604800DAE77D /* Adapter.swift in Sources */,
+				D019638C22816CB700DAE77D /* GoogleRouter.swift in Sources */,
 				D01407B4223F6A400074263D /* AppDelegate.swift in Sources */,
 				D01407D0223FF2CA0074263D /* WeatherViewController.swift in Sources */,
 				D019637B22804B5C00DAE77D /* WeatherDataTabBarController.swift in Sources */,
@@ -301,6 +320,7 @@
 				D01407CA223F84C40074263D /* TutorialPageViewController.swift in Sources */,
 				D019637222802C2300DAE77D /* WeatherViewModel.swift in Sources */,
 				D019638522806A4600DAE77D /* DayWeather.swift in Sources */,
+				D01963882281591800DAE77D /* WeatherRouter.swift in Sources */,
 				D0595C2A2243C7CF00CD9FA5 /* ImageStore.swift in Sources */,
 				D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */,
 				D01407CE223FCC0C0074263D /* CardView.swift in Sources */,
