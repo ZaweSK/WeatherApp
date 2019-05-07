@@ -41,6 +41,8 @@ class DataFetcher {
     }()
     
     
+    // MARK: - OpenWeather Maps Networking
+    
     private func getOpenWeatherMapParams(for method: LocationMethod) -> [String:String]{
         
         switch method{
@@ -69,28 +71,7 @@ class DataFetcher {
         }
     }
     
-    private func createURL(with urlString: String, _ params: [String:String])->URL{
-        
-        var urlComponents = URLComponents(string: urlString)!
-        
-        let queryItems = convertToQueryItems(dict: params)
-        
-        urlComponents.queryItems = queryItems
-        
-        return urlComponents.url!
-    }
     
-    private func convertToQueryItems(dict: [String:String])->[URLQueryItem] {
-        var queryItems = [URLQueryItem]()
-        
-        for (key,value) in dict {
-            let queryItem = URLQueryItem(name: key, value: value)
-            queryItems.append(queryItem)
-        }
-        return queryItems
-    }
-    
-    //
     func fetchWeatherData(for method: LocationMethod)-> Promise<Data> {
         
         return Promise { seal in
@@ -111,6 +92,27 @@ class DataFetcher {
         }
     }
     
+    
+    func getForecast(for method: LocationMethod)->Promise<Data>{
+        return Promise { seal in
+            
+            let params = getOpenWeatherMapParams(for: method)
+            
+            openWeatherSessionManager.request(WeatherRouter.forecast(parameters: params)).validate().responseData() { response in
+                
+                switch response.result {
+                    
+                case .success(let data):
+                    seal.fulfill(data)
+                    
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    // MARK: - GooglePlaces networking
     
     func fetchPlacePhotos(for reference: String)->Promise<UIImage>{
         
@@ -140,14 +142,14 @@ class DataFetcher {
                     seal.reject(error)
                 }
             }
-            
-
         }
     }
     
     
     
     func fetchPlaceDetails(for id: String)->Promise<JSON>{
+        
+        
         
         return Promise { seal in
             
@@ -157,6 +159,9 @@ class DataFetcher {
         
             googlePlacesSessionManager.request(GoogleRouter.placeDetails(parameters: params)).validate().responseJSON{ response in
          
+                
+                print(#function)
+                print(response.request)
                 switch response.result {
                     
                 case .success(let json):
@@ -172,6 +177,7 @@ class DataFetcher {
     
     func fetchPlaceId(for city: String)->Promise<JSON> {
         
+        
         return Promise { seal in
             
             let params = [
@@ -181,6 +187,8 @@ class DataFetcher {
             
             googlePlacesSessionManager.request(GoogleRouter.placeSearch(parameters: params)).validate().responseJSON{ response in
                 
+                print(#function)
+                print(response.request)
                 switch response.result {
                     
                 case .success(let json):
@@ -193,28 +201,6 @@ class DataFetcher {
         }
     }
     
-    
-    
-    
-    func getForecast(for method: LocationMethod)->Promise<Data>{
-        return Promise { seal in
-            
-            let params = getOpenWeatherMapParams(for: method)
-            
-            openWeatherSessionManager.request(WeatherRouter.forecast(parameters: params)).validate().responseData() { response in
-           
-                print(response.request)
-                switch response.result {
-                    
-                case .success(let data):
-                    seal.fulfill(data)
-                    
-                case .failure(let error):
-                    seal.reject(error)
-                }
-            }
-        }
-    }
 }
 
 

@@ -9,8 +9,8 @@
 import Foundation
 import UIKit
 
-class WeatherDataTabBarController: UITabBarController, WeatherCoordinator {
-    
+class WeatherDataTabBarController: UITabBarController, WeatherCoordinator
+{
     
     var weatherViewModel: WeatherViewModel?
     var dataFetcher = DataFetcher()

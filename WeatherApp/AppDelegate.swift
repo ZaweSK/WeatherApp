@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     }
 
     func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        weatherViewController?.getWeatherData(for: .city((weatherViewController?.weather.city)!))
+        weatherViewController?.getWeatherData(for: .city((weatherViewController?.weatherViewModel?.name)!))
         completionHandler(.newData)
     }
     

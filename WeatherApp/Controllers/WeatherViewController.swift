@@ -27,7 +27,8 @@ class WeatherViewController: UIViewController
     
     var imageStore = ImageStore()
     
-    var weather = WeatherDataModel()
+//    var weather = WeatherDataModel()
+    
     
     var weatherViewModel : WeatherViewModel?
     
@@ -40,8 +41,6 @@ class WeatherViewController: UIViewController
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-//        dataFetcher = (tabBarController as! WeatherDataTabBarController).dataFetcher
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.weatherViewController = self
@@ -78,17 +77,6 @@ class WeatherViewController: UIViewController
         }, completion: nil)
     }
     
-    func updateUIWithWeatherData(){
-        tempLabel.text = String(weather.temperature) + "℃"
-        cityLabel.text = weather.city
-        
-        if let image = UIImage(named: weather.weatherIconName) {
-            weatherConditionImageVIew.image = image
-        }
-        
-        spinner.stopAnimating()
-        showElements()
-    }
     
     func hideWeatherConditions() {
         weatherConditionCenterX.constant = -view.bounds.width / 2
@@ -135,7 +123,8 @@ class WeatherViewController: UIViewController
     
     func setUpImage() {
         
-        guard self.weather.photoReference.count > 0 else {
+        
+        guard let weatherVM = weatherViewModel, weatherVM.photoReference.count > 0 else {
             
             backgroundImageView.image = UIImage(named: "cityNotFound")
             
@@ -144,9 +133,9 @@ class WeatherViewController: UIViewController
             return
         }
         
-        dataFetcher.fetchPlacePhotos(for: weather.photoReference).done { image in
+        dataFetcher.fetchPlacePhotos(for: weatherVM.photoReference).done { image in
             
-            self.imageStore.setImage(image, forKey: self.weather.city)
+            self.imageStore.setImage(image, forKey: weatherVM.name)
             
             self.backgroundImageView.image = image
             
@@ -154,7 +143,22 @@ class WeatherViewController: UIViewController
             
             }.catch { error in
                 
-                print("Error unable to get photo with specific reference : \(self.weather.photoReference) /n Error: \(error) ")
+                print("Error unable to get photo with specific reference : \(weatherVM.photoReference) /n Error: \(error) ")
+        }
+    }
+    
+    func setUpCityImage(){
+        guard let weatherVM = weatherViewModel else { return}
+        
+        if let imageFromCache = imageStore.image(forKey: weatherVM.name){
+            
+            backgroundImageView.image = imageFromCache
+            
+            showImage()
+            
+        }else {
+            
+            checkForPhotoReference(for: weatherVM.name)
         }
     }
     
@@ -179,12 +183,6 @@ class WeatherViewController: UIViewController
     
     // MARK: - data fetching
     
-    func shareModel(){
-        guard let model = self.weatherViewModel else { return }
-        let tabBarController = self.tabBarController as! WeatherDataTabBarController
-        tabBarController.weatherViewModel = model
-    }
-    
     func getWeatherData(for locationMethod: LocationMethod) {
         
         spinner.startAnimating()
@@ -194,7 +192,6 @@ class WeatherViewController: UIViewController
             
             do {
                 self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
-                self.shareModel()
                 
                 self.updateUIWithWeatherData2()
                 self.setUpCityImage()
@@ -209,34 +206,21 @@ class WeatherViewController: UIViewController
                 print(error)
             }
             
-            
-            
             }.catch { error in
                 let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                 let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                 alertController.addAction(alertAction)
                 self.present(alertController, animated: true, completion: nil)
-                
         }
-        
-        
-//        dataFetcher.fetchWeatherData(for: locationMethod).done { json in
-//
-//            self.updateWeatherData(with: json)
-//
-//            }.catch {error in
-//
-//                let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-//                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-//                alertController.addAction(alertAction)
-//                self.present(alertController, animated: true, completion: nil)
-//        }
     }
     
     
     func checkForPhotoReference(for city: String){
         
+        guard weatherViewModel != nil else { return}
+        
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        
         
         firstly {
             
@@ -250,7 +234,7 @@ class WeatherViewController: UIViewController
                 
             }.done { json in
                 
-                self.weather.photoReference = json["result"]["photos"][0]["photo_reference"].stringValue
+                self.weatherViewModel!.photoReference = json["result"]["photos"][0]["photo_reference"].stringValue
                 
             }.ensure {
                 
@@ -262,46 +246,7 @@ class WeatherViewController: UIViewController
         }
     }
     
-    // MARK: - Parsing data
-    
-    func updateWeatherData(with json: JSON){
-        
-        if let temp = json["main"]["temp"].double {
-            weather.temperature = Int(temp - 273)
-            weather.city = json["name"].stringValue
-            weather.condition = json["weather"][0]["id"].intValue
-            
-            if let imageFromCache = imageStore.image(forKey: weather.city){
-                
-                backgroundImageView.image = imageFromCache
-                
-                showImage()
-                
-            }else {
-        
-                checkForPhotoReference(for: weather.city)
-            }
-            
-            updateUIWithWeatherData()
-        }
-    }
-    
-    func setUpCityImage(){
-        guard let weatherVM = weatherViewModel else { return}
-        
-        if let imageFromCache = imageStore.image(forKey: weatherVM.name){
-            
-            backgroundImageView.image = imageFromCache
-            
-            showImage()
-            
-        }else {
-            
-            checkForPhotoReference(for: weatherVM.name)
-        }
-    }
-    
-    
+
     // MARK: - NAvigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -325,9 +270,6 @@ class WeatherViewController: UIViewController
         default: break
             
         }
-        
-       
-        
     }
 }
 

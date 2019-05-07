@@ -649,64 +649,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6ZM-ul-eHm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-948" y="1680.8095952023989"/>
-        </scene>
-        <!--Forecast-->
-        <scene sceneID="Vwq-qc-QOH">
-            <objects>
-                <tableViewController id="nf6-3t-JF4" customClass="ForecastTableViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="u18-0b-6B4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="forecastCell" id="gbi-Eg-fWQ" customClass="ForecastCell" customModule="WeatherApp" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="80"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gbi-Eg-fWQ" id="osu-Ez-NXg">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="21 °C" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXx-cZ-TJ8">
-                                            <rect key="frame" x="301" y="29.5" width="42" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunny AF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="37k-qC-a3c">
-                                            <rect key="frame" x="16" y="39.5" width="73" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rmI-Zq-SMW">
-                                            <rect key="frame" x="16" y="17.5" width="32" height="14.5"/>
-                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                            <color key="textColor" red="0.1861468205" green="0.67856581100000002" blue="0.94798937189999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstItem="37k-qC-a3c" firstAttribute="centerY" secondItem="osu-Ez-NXg" secondAttribute="centerY" constant="10" id="1xz-1P-Vi2"/>
-                                        <constraint firstItem="37k-qC-a3c" firstAttribute="top" secondItem="rmI-Zq-SMW" secondAttribute="bottom" constant="7.5" id="Njk-4Z-byk"/>
-                                        <constraint firstItem="37k-qC-a3c" firstAttribute="leading" secondItem="osu-Ez-NXg" secondAttribute="leadingMargin" id="SVf-yg-CnY"/>
-                                        <constraint firstItem="37k-qC-a3c" firstAttribute="leading" secondItem="rmI-Zq-SMW" secondAttribute="leading" id="Zal-YK-Zwg"/>
-                                        <constraint firstItem="cXx-cZ-TJ8" firstAttribute="centerY" secondItem="osu-Ez-NXg" secondAttribute="centerY" id="l7X-Fd-dvD"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="cXx-cZ-TJ8" secondAttribute="trailing" constant="16" id="xMP-hJ-twy"/>
-                                    </constraints>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="nf6-3t-JF4" id="Iki-Ac-eil"/>
-                            <outlet property="delegate" destination="nf6-3t-JF4" id="Rzi-0i-6Tp"/>
-                        </connections>
-                    </tableView>
-                    <tabBarItem key="tabBarItem" title="Forecast" id="cwc-mE-eA2"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="y4N-nW-OBu" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="153" y="1715"/>
+            <point key="canvasLocation" x="-202" y="1617"/>
         </scene>
     </scenes>
     <resources>
