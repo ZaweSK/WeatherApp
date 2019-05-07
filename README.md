@@ -23,3 +23,4 @@ App shows user weather conditions for his location. User can also change the loc
 * fetching data while the app is in the background state with background fetch 
 * caching images using NSCache
 * saving images to filesystem
+* adapt to rotation of device with size classes, traits varying

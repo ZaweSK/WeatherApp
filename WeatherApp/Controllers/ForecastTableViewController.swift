@@ -18,7 +18,6 @@ class ForecastTableViewController: UITableViewController {
     var forecastListViewModel : ForecastlistViewModel?
     var dayWeatherList = [DayWeather]()
     
-    
     var currentCity: String?
     
     func getSharedModel(){
@@ -114,30 +113,21 @@ class ForecastTableViewController: UITableViewController {
     
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        
-        
-        print(dayWeatherList.count)
         return dayWeatherList.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
-        print(dayWeatherList[section].forecastList.count)
         return dayWeatherList[section].forecastList.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! ForecastCell
         
-        
         let forecast = dayWeatherList[indexPath.section].forecastList[indexPath.row]
-        
         
         cell.temperatureLabel.text = forecast.temperature.current.asCelsius
         cell.timeLabel.text = forecast.time.timeOnly()
         cell.weatherConditionLabel.text = forecast.conditions.first?.description.capitalized
-        
         
         return cell
     }
