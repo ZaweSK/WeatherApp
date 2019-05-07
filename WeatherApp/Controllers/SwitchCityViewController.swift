@@ -145,10 +145,6 @@ class SwitchCityViewController: UIViewController, UITextFieldDelegate
     
     //MARK: - UITextField Delegate methods
     
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        print("what")
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         cityTextField.resignFirstResponder()
         return true

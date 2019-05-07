@@ -319,10 +319,8 @@ class WeatherViewController: UIViewController
         switch (traitCollection.horizontalSizeClass, traitCollection.verticalSizeClass) {
             
         case (.compact, .compact):
-            print("landscape")
             cityLabel.textAlignment = .left
         case(.compact,.regular):
-            print("portrait")
             cityLabel.textAlignment = .center
         default: break
             

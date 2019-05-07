@@ -8,8 +8,8 @@
 
 import UIKit
 
-class ForecastViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
-    
+class ForecastViewController: UIViewController , UITableViewDataSource, UITableViewDelegate
+{
     
     // MARK: - Properities
     
@@ -21,7 +21,6 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
     // MARK: - Outlets
     
     @IBOutlet var tableView : UITableView!
-    
     @IBOutlet var cityLabel : UILabel!
     
     // MARK: - ViewControllers's Life Cycle methods
@@ -30,11 +29,11 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         guard cityFromWeatherCoordinator != currentlyForecastedCity else  {
             return
         }
@@ -97,5 +96,4 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dayWeatherList[section].date.dayOfWeek()
     }
-
 }

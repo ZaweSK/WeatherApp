@@ -20,7 +20,6 @@
 		D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D62240DF4C0074263D /* SwitchCityViewController.swift */; };
 		D01407D92240EA450074263D /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D82240EA450074263D /* DataFetcher.swift */; };
 		D019637222802C2300DAE77D /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637122802C2300DAE77D /* WeatherViewModel.swift */; };
-		D01963742280416300DAE77D /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01963732280416300DAE77D /* ForecastTableViewController.swift */; };
 		D0196379228041D000DAE77D /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0196378228041D000DAE77D /* ForecastCell.swift */; };
 		D019637B22804B5C00DAE77D /* WeatherDataTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */; };
 		D019637F228052BF00DAE77D /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637E228052BF00DAE77D /* ForecastListViewModel.swift */; };
@@ -51,7 +50,6 @@
 		D01407D62240DF4C0074263D /* SwitchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCityViewController.swift; sourceTree = "<group>"; };
 		D01407D82240EA450074263D /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		D019637122802C2300DAE77D /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
-		D01963732280416300DAE77D /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
 		D0196378228041D000DAE77D /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
 		D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataTabBarController.swift; sourceTree = "<group>"; };
 		D019637E228052BF00DAE77D /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
@@ -156,7 +154,6 @@
 				D01407D62240DF4C0074263D /* SwitchCityViewController.swift */,
 				D01407CB223F95250074263D /* TutorialViewController.swift */,
 				D01407C9223F84C40074263D /* TutorialPageViewController.swift */,
-				D01963732280416300DAE77D /* ForecastTableViewController.swift */,
 				D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */,
 				D019638D2281875C00DAE77D /* ForecastViewController.swift */,
 			);
@@ -311,7 +308,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D01963742280416300DAE77D /* ForecastTableViewController.swift in Sources */,
 				D019638A2281604800DAE77D /* Adapter.swift in Sources */,
 				D019638C22816CB700DAE77D /* GoogleRouter.swift in Sources */,
 				D01407B4223F6A400074263D /* AppDelegate.swift in Sources */,

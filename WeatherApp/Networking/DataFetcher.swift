@@ -203,6 +203,7 @@ class DataFetcher {
             
             openWeatherSessionManager.request(WeatherRouter.forecast(parameters: params)).validate().responseData() { response in
            
+                print(response.request)
                 switch response.result {
                     
                 case .success(let data):
