@@ -20,6 +20,12 @@
 		D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D62240DF4C0074263D /* SwitchCityViewController.swift */; };
 		D01407D92240EA450074263D /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01407D82240EA450074263D /* DataFetcher.swift */; };
 		D019637222802C2300DAE77D /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637122802C2300DAE77D /* WeatherViewModel.swift */; };
+		D01963742280416300DAE77D /* ForecastTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D01963732280416300DAE77D /* ForecastTableViewController.swift */; };
+		D0196379228041D000DAE77D /* ForecastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0196378228041D000DAE77D /* ForecastCell.swift */; };
+		D019637B22804B5C00DAE77D /* WeatherDataTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */; };
+		D019637F228052BF00DAE77D /* ForecastListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019637E228052BF00DAE77D /* ForecastListViewModel.swift */; };
+		D019638322805E1800DAE77D /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019638222805E1800DAE77D /* Formatter.swift */; };
+		D019638522806A4600DAE77D /* DayWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = D019638422806A4600DAE77D /* DayWeather.swift */; };
 		D0595C2A2243C7CF00CD9FA5 /* ImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0595C292243C7CF00CD9FA5 /* ImageStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +47,12 @@
 		D01407D62240DF4C0074263D /* SwitchCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchCityViewController.swift; sourceTree = "<group>"; };
 		D01407D82240EA450074263D /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		D019637122802C2300DAE77D /* WeatherViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewModel.swift; sourceTree = "<group>"; };
+		D01963732280416300DAE77D /* ForecastTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastTableViewController.swift; sourceTree = "<group>"; };
+		D0196378228041D000DAE77D /* ForecastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCell.swift; sourceTree = "<group>"; };
+		D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDataTabBarController.swift; sourceTree = "<group>"; };
+		D019637E228052BF00DAE77D /* ForecastListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastListViewModel.swift; sourceTree = "<group>"; };
+		D019638222805E1800DAE77D /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Formatter.swift; path = ../Formatter.swift; sourceTree = "<group>"; };
+		D019638422806A4600DAE77D /* DayWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayWeather.swift; sourceTree = "<group>"; };
 		D0595C292243C7CF00CD9FA5 /* ImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,10 +106,12 @@
 		D01407B2223F6A400074263D /* WeatherApp */ = {
 			isa = PBXGroup;
 			children = (
+				D01963752280419700DAE77D /* Cells */,
 				D01407D52240D80B0074263D /* Controllers */,
 				D01407D42240D8040074263D /* Views */,
 				D01407D32240D7FE0074263D /* Models */,
 				D01407B3223F6A400074263D /* AppDelegate.swift */,
+				D019638222805E1800DAE77D /* Formatter.swift */,
 				D01407BA223F6A420074263D /* Assets.xcassets */,
 				D01407BF223F6A420074263D /* Info.plist */,
 			);
@@ -110,6 +124,8 @@
 				D01407D12240D7FA0074263D /* WeatherDataModel.swift */,
 				D0595C292243C7CF00CD9FA5 /* ImageStore.swift */,
 				D019637122802C2300DAE77D /* WeatherViewModel.swift */,
+				D019637E228052BF00DAE77D /* ForecastListViewModel.swift */,
+				D019638422806A4600DAE77D /* DayWeather.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -132,8 +148,18 @@
 				D01407CB223F95250074263D /* TutorialViewController.swift */,
 				D01407C9223F84C40074263D /* TutorialPageViewController.swift */,
 				D01407D82240EA450074263D /* DataFetcher.swift */,
+				D01963732280416300DAE77D /* ForecastTableViewController.swift */,
+				D019637A22804B5C00DAE77D /* WeatherDataTabBarController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		D01963752280419700DAE77D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D0196378228041D000DAE77D /* ForecastCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,16 +291,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D01963742280416300DAE77D /* ForecastTableViewController.swift in Sources */,
 				D01407B4223F6A400074263D /* AppDelegate.swift in Sources */,
 				D01407D0223FF2CA0074263D /* WeatherViewController.swift in Sources */,
+				D019637B22804B5C00DAE77D /* WeatherDataTabBarController.swift in Sources */,
 				D01407D22240D7FA0074263D /* WeatherDataModel.swift in Sources */,
+				D0196379228041D000DAE77D /* ForecastCell.swift in Sources */,
 				D01407CC223F95250074263D /* TutorialViewController.swift in Sources */,
 				D01407CA223F84C40074263D /* TutorialPageViewController.swift in Sources */,
 				D019637222802C2300DAE77D /* WeatherViewModel.swift in Sources */,
+				D019638522806A4600DAE77D /* DayWeather.swift in Sources */,
 				D0595C2A2243C7CF00CD9FA5 /* ImageStore.swift in Sources */,
 				D01407D72240DF4C0074263D /* SwitchCityViewController.swift in Sources */,
 				D01407CE223FCC0C0074263D /* CardView.swift in Sources */,
+				D019638322805E1800DAE77D /* Formatter.swift in Sources */,
 				D01407D92240EA450074263D /* DataFetcher.swift in Sources */,
+				D019637F228052BF00DAE77D /* ForecastListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

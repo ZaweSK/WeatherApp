@@ -25,7 +25,7 @@ class WeatherViewController: UIViewController
     
     var weatherViewModel : WeatherViewModel?
     
-    var dataFetcher = DataFetcher()
+    var dataFetcher : DataFetcher!
     
     var UIElements = [UIView]()
     
@@ -34,6 +34,8 @@ class WeatherViewController: UIViewController
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        dataFetcher = (tabBarController as! WeatherDataTabBarController).dataFetcher
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.weatherViewController = self
@@ -48,16 +50,10 @@ class WeatherViewController: UIViewController
         backgroundImageView.alpha = 0
         
         hideElements()
+        hideWeatherConditions()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    
-        weatherConditionCenterX.constant = -view.bounds.width / 2
-        weatherConditionPadding.isActive = false
-        
-        view.layoutIfNeeded()
-    }
+
     
     // MARK: - UIConfiguration methods
     
@@ -177,17 +173,23 @@ class WeatherViewController: UIViewController
     
     // MARK: - data fetching
     
+    func shareModel(){
+        guard let model = self.weatherViewModel else { return }
+        let tabBarController = self.tabBarController as! WeatherDataTabBarController
+        tabBarController.weatherViewModel = model
+    }
+    
     func getWeatherData(for locationMethod: LocationMethod) {
         
         spinner.startAnimating()
-        
         
         
         dataFetcher.fetchWeatherData2(for: locationMethod).done { data in
             
             do {
                 self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
-                print(self.weatherViewModel)
+                self.shareModel()
+                
                 
                 self.updateUIWithWeatherData2()
                 self.setUpCityImage()

@@ -28,9 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         if introductionComplete {
             
             let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-            let initialVC = storyBoard.instantiateViewController(withIdentifier: "Weather")
+            
+            let initialVC = storyBoard.instantiateViewController(withIdentifier: "TabBar") as! UITabBarController
             
             window?.rootViewController = initialVC
+            
         }
         
         

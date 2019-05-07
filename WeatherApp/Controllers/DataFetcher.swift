@@ -32,6 +32,7 @@ class DataFetcher {
     let openWeatherMap_APP_ID = "ceb75d42efb0a329e2d5d1d6819032b1"
     let openWeatherMapURL = "http://api.openweathermap.org/data/2.5/weather"
     let googleWebService_APP_ID = "AIzaSyBKzijQZxg3vj9JSOolHfy8RmTwq5O7m14"
+    let forecastURL = "http://api.openweathermap.org/data/2.5/forecast"
     
     
     private func getOpenWeatherMapParams(for method: LocationMethod) -> [String:String]{
@@ -197,6 +198,28 @@ class DataFetcher {
                     
                 case .success(let json):
                     seal.fulfill(JSON(json))
+                    
+                case .failure(let error):
+                    seal.reject(error)
+                }
+            }
+        }
+    }
+    
+    
+    
+    func getForecastFor(for method: LocationMethod)->Promise<Data>{
+        return Promise { seal in
+            
+            let params = getOpenWeatherMapParams(for: method)
+            
+            Alamofire.request(forecastURL, method: .get, parameters: params).validate().responseData() { response in
+                
+                print(response.request)
+                switch response.result {
+                    
+                case .success(let data):
+                    seal.fulfill(data)
                     
                 case .failure(let error):
                     seal.reject(error)
