@@ -12,10 +12,16 @@ import Alamofire
 import PromiseKit
 import SwiftyJSON
 
+protocol WeatherCoordinator {
+    func cityChanged(_ city: String)
+}
+
 class WeatherViewController: UIViewController
 {
     
     // MARK: - Stored Properities
+    
+    var weatherCoordinatorDelegate: WeatherCoordinator?
     
     var locationManager = CLLocationManager()
     
@@ -35,7 +41,7 @@ class WeatherViewController: UIViewController
         
         super.viewDidLoad()
         
-        dataFetcher = (tabBarController as! WeatherDataTabBarController).dataFetcher
+//        dataFetcher = (tabBarController as! WeatherDataTabBarController).dataFetcher
         
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         appDelegate.weatherViewController = self
@@ -190,9 +196,14 @@ class WeatherViewController: UIViewController
                 self.weatherViewModel = try JSONDecoder().decode(WeatherViewModel.self, from: data)
                 self.shareModel()
                 
-                
                 self.updateUIWithWeatherData2()
                 self.setUpCityImage()
+                
+                guard let city = self.weatherViewModel?.name else {
+                    return
+                }
+                
+                self.weatherCoordinatorDelegate?.cityChanged(city)
                 
             } catch {
                 print(error)
@@ -340,6 +351,8 @@ extension WeatherViewController: ChangeCityDelegate {
         updateUIWithWeatherData2()
         
         setUpCityImage()
+        
+        weatherCoordinatorDelegate?.cityChanged(viewModel.name)
     }
 }
 

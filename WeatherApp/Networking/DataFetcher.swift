@@ -12,6 +12,7 @@ import PromiseKit
 import SwiftyJSON
 import CoreLocation
 
+
 enum JSONError: Error {
     case generalError
 }
