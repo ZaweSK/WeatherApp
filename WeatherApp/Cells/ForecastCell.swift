@@ -16,4 +16,10 @@ class ForecastCell: UITableViewCell {
     @IBOutlet var weatherConditionLabel: UILabel!
     
     @IBOutlet var timeLabel: UILabel!
+    
+    func configure(with forecast: ForecastViewModel) {
+        self.temperatureLabel.text = forecast.temperature.current.asCelsius
+        self.timeLabel.text = forecast.time.timeOnly()
+        self.weatherConditionLabel.text = forecast.conditions.first?.description.capitalized
+    }
 }

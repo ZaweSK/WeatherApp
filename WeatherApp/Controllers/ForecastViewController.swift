@@ -10,15 +10,21 @@ import UIKit
 
 class ForecastViewController: UIViewController , UITableViewDataSource, UITableViewDelegate{
     
+    
+    // MARK: - Properities
+    
     var currentlyForecastedCity : String?
     var cityFromWeatherCoordinator: String?
     var dataFetcher : DataFetcher!
-    
-    var forecastListViewModel : ForecastlistViewModel?
     var dayWeatherList = [DayWeather]()
     
+    // MARK: - Outlets
+    
     @IBOutlet var tableView : UITableView!
+    
     @IBOutlet var cityLabel : UILabel!
+    
+    // MARK: - ViewControllers's Life Cycle methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,16 +35,16 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         guard cityFromWeatherCoordinator != currentlyForecastedCity else  {
             return
         }
-        
         currentlyForecastedCity = cityFromWeatherCoordinator
         cityLabel.text = currentlyForecastedCity
         
         getForecastData()
     }
+    
+    // MARK: - Data fetching & parsing
     
     func getForecastData(){
         
@@ -51,13 +57,13 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
             decoder.dateDecodingStrategy = .secondsSince1970
             
             do {
-                self.forecastListViewModel = try decoder.decode(ForecastlistViewModel.self, from: data)
+                let forecastListViewModel = try decoder.decode(ForecastlistViewModel.self, from: data)
+                self.dayWeatherList = forecastListViewModel.organizeForecasts()
+                self.tableView.reloadData()
+                
             } catch {
                 print(error)
             }
-            
-            self.checkDays()
-            self.tableView.reloadData()
             
             }.catch { error in
                 
@@ -68,54 +74,28 @@ class ForecastViewController: UIViewController , UITableViewDataSource, UITableV
         }
     }
     
-    func checkDays() {
-        let calendar = Calendar.current
-        
-        guard let forecastList = forecastListViewModel else {return}
-        
-        dayWeatherList = forecastList.list.reduce(
-            into: [Date: [ForecastViewModel]](),
-            { result, forecastItem in
-                let dateWithoutTime = calendar.date(
-                    from: calendar.dateComponents(
-                        [.year, .month, .day],
-                        from: forecastItem.time
-                    )
-                )
-                
-                guard let groupingDate = dateWithoutTime else {
-                    return
-                }
-                
-                guard result.keys.contains(groupingDate) else {
-                    result[groupingDate] = [forecastItem]
-                    
-                    return
-                }
-                
-                result[groupingDate]?.append(forecastItem)
-        }
-            ).sorted {
-                $0.0 < $1.0
-            }.map { item -> DayWeather in
-                return DayWeather(date: item.key, forecastList: item.value)
-        }
-    }
-   
-    
     //MARK: - UITableView DataSource Methods
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return dayWeatherList.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return dayWeatherList[section].forecastList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "forecastCell", for: indexPath) as! ForecastCell
+        
+        let forecast = dayWeatherList[indexPath.section].forecastList[indexPath.row]
+        
+        cell.configure(with: forecast)
+        
         return cell
     }
     
-    //MARK: - UITableViewDelegate Methods
-    
-    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return dayWeatherList[section].date.dayOfWeek()
+    }
 
 }

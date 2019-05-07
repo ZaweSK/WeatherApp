@@ -13,5 +13,5 @@ struct DayWeather {
     var date: Date
     var forecastList: [ForecastViewModel]
     
-   
 }
+

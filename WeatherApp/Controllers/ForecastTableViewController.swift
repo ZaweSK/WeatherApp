@@ -110,8 +110,6 @@ class ForecastTableViewController: UITableViewController {
     
     // MARK: - Table view data source
     
-    
-    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return dayWeatherList.count
     }
@@ -135,39 +133,37 @@ class ForecastTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return dayWeatherList[section].date.dayOfWeek()
     }
-    
-    
 }
 
 
-
-extension Date {
-    func dayOfWeek() -> String? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "EEEE"
-        return dateFormatter.string(from: self).capitalized
-    }
-    
-    func timeOnly()->String {
-        let minute = Formatter.minute0x.string(from: self)
-        let hour = Formatter.hour24.string(from: self)
-        return "\(hour):\(minute)"
-    }
-    
-}
-
-extension Formatter {
-    
-    static let minute0x: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "mm"
-        return formatter
-    }()
-    
-    static let hour24: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh"
-        return formatter
-    }()
-}
+//
+//extension Date {
+//    func dayOfWeek() -> String? {
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "EEEE"
+//        return dateFormatter.string(from: self).capitalized
+//    }
+//    
+//    func timeOnly()->String {
+//        let minute = Formatter.minute0x.string(from: self)
+//        let hour = Formatter.hour24.string(from: self)
+//        return "\(hour):\(minute)"
+//    }
+//    
+//}
+//
+//extension Formatter {
+//    
+//    static let minute0x: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "mm"
+//        return formatter
+//    }()
+//    
+//    static let hour24: DateFormatter = {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH"
+//        return formatter
+//    }()
+//}
 
